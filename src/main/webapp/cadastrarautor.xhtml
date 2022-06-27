@@ -1,0 +1,20 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<h:body>
+		<h:form>
+			<h:panelGrid columns="3">
+				<f:facet name="header">Dados do autor</f:facet>
+
+				<h:outputLabel value="Nome" for="name" />
+				<h:inputText id="name" value="#{cadastrarAutorBean.name}" required="true" requiredMessage="O nome do autor deve ser informado" />
+				<h:message for="name"/>
+			</h:panelGrid>
+
+			<h:commandButton action="#{cadastrarAutorBean.cadastrar}" value="Cadastrar autor" />
+		</h:form>
+	</h:body>
+</html>

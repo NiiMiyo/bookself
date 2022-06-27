@@ -3,11 +3,14 @@ package douglas.bookself.models;
 import java.io.Serializable;
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 
 
@@ -16,19 +19,25 @@ public class Author implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(insertable = false)
+	private Long id;
 
 	@Column(nullable = false)
 	private String name;
 
-	@ManyToMany(mappedBy = "authors")
+	@ManyToMany(cascade = CascadeType.ALL, targetEntity = Book.class)
+	@JoinTable(
+		name = "author_books",
+		joinColumns = { @JoinColumn( name = "author_id" ) },
+		inverseJoinColumns = { @JoinColumn( name = "book_id" ) }
+	)
 	private Collection<Book> books;
 
 	public Author() { super(); }
 
-	public long getId() { return this.id; }
-	public void setId(long id) { this.id = id; }
+	public Long getId() { return this.id; }
+	public void setId(Long id) { this.id = id; }
 
 	public String getName() { return this.name; }
 	public void setName(String name) { this.name = name; }

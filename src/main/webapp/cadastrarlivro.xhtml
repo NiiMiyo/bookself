@@ -5,7 +5,7 @@
 	xmlns:h="http://java.sun.com/jsf/html">
 
 	<h:body>
-		<h:form>
+		<h:form enctype="multipart/form-data" >
 			<h:panelGrid columns="3">
 				<f:facet name="header">Dados do livro</f:facet>
 
@@ -16,6 +16,17 @@
 				<h:outputLabel value="Descrição" for="description" />
 				<h:inputTextarea id="description" value="#{cadastrarLivroBean.description}" required="true" requiredMessage="A descrição do livro deve ser informada" />
 				<h:message for="description"/>
+
+				<h:outputLabel value="Autores do livro" for="select-authors" />
+				<h:selectManyCheckbox id="select-authors" value="#{cadastrarLivroBean.selectedAuthors}" required="false" requiredMessage="Precisa ter autor" >
+					<f:selectItems value="#{cadastrarLivroBean.allAuthors}" var="a" itemLabel="#{a.name}" itemValue="#{a}" />
+				</h:selectManyCheckbox>
+				<h:message for="select-authors"/>
+
+				<h:outputLabel value="Capa do livro" for="cover-file" />
+				<h:inputFile id="cover-file" value="#{cadastrarLivroBean.coverFile}" required="true" requiredMessage="A capa do livro deve ser informada">
+				</h:inputFile>
+				<h:message for="cover-file"/>
 			</h:panelGrid>
 
 			<h:commandButton action="#{cadastrarLivroBean.cadastrar}" value="Cadastrar livro" />
