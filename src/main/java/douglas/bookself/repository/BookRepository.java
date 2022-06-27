@@ -1,8 +1,10 @@
 package douglas.bookself.repository;
 
 import java.util.Collection;
+import java.util.stream.Collectors;
 
-import douglas.bookself.models.Author;
+import javax.persistence.EntityManager;
+
 import douglas.bookself.models.Book;
 
 public class BookRepository extends Repository<Book> {
@@ -17,19 +19,29 @@ public class BookRepository extends Repository<Book> {
 		return BookRepository.instance;
 	}
 
-	public Book criarLivro(String title, String description, Collection<Author> authors, String imageName) {
+	public Book criarLivro(String title, String description, Collection<Long> authors, String imageName) {
 		Book book = new Book();
-		
+
 		book.setTitle(title);
 		book.setDescription(description);
-		book.setAuthors(authors);
 		book.setCover(imageName);
 
-		this.getEntityManager().getTransaction().begin();
-		this.getEntityManager().persist(book);
-		this.getEntityManager().getTransaction().commit();
+		EntityManager em = this.getEntityManager();
 
+		em.getTransaction().begin();
+		em.persist(book);
+		em.getTransaction().commit();
+
+		AuthorBookRepository.getInstance().criarRelacao(book.getId(), authors);
 		return book;
+	}
+
+	public Collection<Book> getWithId(Collection<Long> ids) {
+		return this
+			.listAll()
+			.stream()
+			.filter(b -> ids.contains( b.getId()) )
+			.collect(Collectors.toList());
 	}
 
 	@SuppressWarnings("unchecked")

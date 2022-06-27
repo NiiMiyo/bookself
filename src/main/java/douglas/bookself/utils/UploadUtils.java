@@ -26,9 +26,9 @@ public class UploadUtils {
 
 	private static String getFilename(Part file) {
 		for (String cd : file.getHeader("content-disposition").split(";")) {
-			if (cd.trim().startsWith("filename")) {
-				String filename = cd.substring(cd.indexOf('-') + 1).trim().replace("\"", "");
-				return filename.substring(filename.lastIndexOf('/') + 1).substring(filename.lastIndexOf('\\') + 1);
+			cd = cd.trim();
+			if (cd.startsWith("filename=")) {
+				return cd.substring(10, cd.length() - 1);
 			}
 		}
 		return "";

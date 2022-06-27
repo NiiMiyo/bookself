@@ -2,6 +2,7 @@ package douglas.bookself.beans;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -17,7 +18,7 @@ import douglas.bookself.utils.UploadUtils;
 public class CadastrarLivroBean {
 	private String title;
 	private String description;
-	private Collection<Author> selectedAuthors;
+	private Collection<String> selectedAuthors;
 	private Part coverFile;
 
 	public CadastrarLivroBean() {
@@ -27,7 +28,6 @@ public class CadastrarLivroBean {
 	}
 
 	public void cadastrar() {
-		System.out.println(this.selectedAuthors);
 		String imageName = UploadUtils.saveCover(this.coverFile);
 
 		if (imageName == null) {
@@ -37,7 +37,8 @@ public class CadastrarLivroBean {
 					"cover-file",
 					new FacesMessage(
 						FacesMessage.SEVERITY_WARN, "Erro ao enviar imagem", "")
-				);
+					);
+			return;
 		}
 
 		BookRepository
@@ -45,7 +46,7 @@ public class CadastrarLivroBean {
 			.criarLivro(
 				this.title,
 				this.description,
-				this.selectedAuthors,
+				this.getSelectedAuthorsIds(),
 				imageName
 			);
 	}
@@ -56,14 +57,21 @@ public class CadastrarLivroBean {
 			.listAll();
 	}
 
+	public Collection<Long> getSelectedAuthorsIds() {
+		return this.selectedAuthors
+				.stream()
+				.map( id -> Long.parseLong(id) )
+				.collect(Collectors.toList());
+	}
+
 	public String getTitle() { return this.title; }
 	public void setTitle(String title) { this.title = title; }
 
 	public String getDescription() { return this.description; }
 	public void setDescription(String description) { this.description = description; }
 
-	public Collection<Author> getSelectedAuthors() { return selectedAuthors; }
-	public void setSelectedAuthors(Collection<Author> selectedAuthors) { this.selectedAuthors = selectedAuthors; }
+	public Collection<String> getSelectedAuthors() { return selectedAuthors; }
+	public void setSelectedAuthors(Collection<String> selectedAuthors) { this.selectedAuthors = selectedAuthors; }
 
 	public Part getCoverFile() { return coverFile; }
 	public void setCoverFile(Part coverFile) { this.coverFile = coverFile; }

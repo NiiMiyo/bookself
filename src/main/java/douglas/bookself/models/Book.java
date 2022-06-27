@@ -3,13 +3,13 @@ package douglas.bookself.models;
 import java.io.Serializable;
 import java.util.Collection;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+
+import douglas.bookself.repository.AuthorBookRepository;
 
 
 @Entity
@@ -23,9 +23,6 @@ public class Book implements Serializable {
 	@Column(nullable = false)
 	private String title;
 
-	@ManyToMany(mappedBy = "books", cascade = CascadeType.ALL, targetEntity = Author.class)
-	private Collection<Author> authors;
-
 	private String description;
 
 	private String cover;
@@ -38,8 +35,9 @@ public class Book implements Serializable {
 	public String getTitle() { return this.title; }
 	public void setTitle(String title) { this.title = title; }
 
-	public Collection<Author> getAuthors() { return this.authors; }
-	public void setAuthors(Collection<Author> authors) { this.authors = authors; }
+	public Collection<Author> getAuthors() {
+		return AuthorBookRepository.getInstance().getAuthors(this.id);
+	}
 
 	public String getDescription() { return this.description; }
 	public void setDescription(String description) { this.description = description; }

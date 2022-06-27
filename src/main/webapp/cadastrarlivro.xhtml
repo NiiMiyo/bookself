@@ -18,9 +18,11 @@
 				<h:message for="description"/>
 
 				<h:outputLabel value="Autores do livro" for="select-authors" />
+
 				<h:selectManyCheckbox id="select-authors" value="#{cadastrarLivroBean.selectedAuthors}" required="false" requiredMessage="Precisa ter autor" >
-					<f:selectItems value="#{cadastrarLivroBean.allAuthors}" var="a" itemLabel="#{a.name}" itemValue="#{a}" />
+					<f:selectItems value="#{cadastrarLivroBean.allAuthors}" var="a" itemLabel="#{a.name}" itemValue="#{a.id}" />
 				</h:selectManyCheckbox>
+
 				<h:message for="select-authors"/>
 
 				<h:outputLabel value="Capa do livro" for="cover-file" />

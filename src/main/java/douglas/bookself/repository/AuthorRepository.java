@@ -1,6 +1,7 @@
 package douglas.bookself.repository;
 
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 import douglas.bookself.models.Author;
 
@@ -17,6 +18,14 @@ public class AuthorRepository extends Repository<Author> {
 		this.getEntityManager().getTransaction().commit();
 
 		return author;
+	}
+
+	public Collection<Author> getWithId(Collection<Long> ids) {
+		return this
+			.listAll()
+			.stream()
+			.filter(a -> ids.contains( a.getId()) )
+			.collect(Collectors.toList());
 	}
 
 	@SuppressWarnings("unchecked")
