@@ -19,14 +19,18 @@
 	</composite:interface>
 
 	<composite:implementation>
-		<h:panelGroup styleClass="destaque-container">
-			<h:graphicImage name="#{cc.attrs.imagename}" library="images"
-				styleClass="destaque-img" />
+		<h:panelGroup styleClass="last-added-container">
+			<h:graphicImage value="#{cc.attrs.imagename}"
+				styleClass="last-added-img" />
 
-			<h:outputText value="#{cc.attrs.bookname}" styleClass="destaque-name" />
+			<h:panelGroup styleClass="last-added-text-container">
+				<h:outputText value="#{cc.attrs.bookname}"
+					styleClass="last-added-bookname" />
 
-			<h:outputText value="#{cc.attrs.authorsname}"
-				styleClass="destaque-authors" />
+				<h:outputText value="#{cc.attrs.authorsname}"
+					styleClass="last-added-authors" />
+			</h:panelGroup>
+
 		</h:panelGroup>
 	</composite:implementation>
 </h:body>

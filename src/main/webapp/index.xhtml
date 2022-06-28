@@ -7,18 +7,48 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:co="http://java.sun.com/jsf/composite/templates">
 
-	<f:loadBundle basename="resources.application" var="msg" />
-	
-	<h:head>
-		<title><h:outputText value="Bookself" /></title>
+<h:head>
+	<title><h:outputText value="Bookself" /></title>
 
-		<link rel="stylesheet" href="resources/css/global.css" />
-		<link rel="stylesheet" href="resources/css/header.css" />
-		<link rel="stylesheet" href="resources/css/livrodestaque.css" />
-	</h:head>
+	<link rel="stylesheet" href="resources/css/global.css" />
+	<link rel="stylesheet" href="resources/css/header.css" />
+	<link rel="stylesheet" href="resources/css/index.css" />
+	<link rel="stylesheet" href="resources/css/ultimosadicionados.css" />
+</h:head>
 
-	<h:body>
-		<co:header />
-		<co:livrodestaque authorsname="Hirohiko Araki" bookname="JoJo Vento Aureo"/>
-	</h:body>
+<h:body>
+	<co:header />
+
+	<h:panelGroup styleClass="home-page">
+		<h:panelGroup styleClass="home-center">
+			<h:outputText value="RECOMENDAÇÃO DO DIA" styleClass="recomendation-container-title" />
+			<h:panelGroup styleClass="recomendation-container">
+				<h:graphicImage value="#{homeBean.recomendation.coverUrl}"
+					styleClass="recomendation-img" />
+
+				<h:panelGroup styleClass="recomendation-text-container">
+					<h:outputText value="#{homeBean.recomendation.title}"
+						styleClass="recomendation-title" />
+
+					<h:outputText value="#{homeBean.recomendation.authorsNames}"
+						styleClass="recomendation-authors"/>
+					
+					<h:outputText value="#{homeBean.recomendation.description}"
+						styleClass="recomendation-description"/>
+				</h:panelGroup>
+			</h:panelGroup>
+		</h:panelGroup>
+
+		<h:panelGroup styleClass="last-added">
+			<h:outputText value="ÚLTIMOS ADICIONADOS"
+				styleClass="last-added-title" />
+
+			<ui:repeat var="lastbook" value="#{homeBean.lastAdded}">
+				<co:ultimosadicionados authorsname="#{lastbook.authorsNames}"
+					bookname="#{lastbook.title}" imagename="#{lastbook.coverUrl}" />
+			</ui:repeat>
+		</h:panelGroup>
+	</h:panelGroup>
+
+</h:body>
 </html>

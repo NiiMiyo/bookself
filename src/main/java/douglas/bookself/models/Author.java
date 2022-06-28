@@ -23,6 +23,7 @@ public class Author implements Serializable {
 	@Column(nullable = false)
 	private String name;
 
+	@Column(length = 500)
 	private String biography;
 
 	public Author() { super(); }

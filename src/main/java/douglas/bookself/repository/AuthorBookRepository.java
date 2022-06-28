@@ -2,6 +2,7 @@ package douglas.bookself.repository;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 import douglas.bookself.models.Author;
 import douglas.bookself.models.AuthorBook;
@@ -31,21 +32,22 @@ public class AuthorBookRepository extends Repository<AuthorBook> {
 
 	@SuppressWarnings("unchecked")
 	public Collection<Author> getAuthors(Long bookId) {
-		return this
-			.getEntityManager()
+		Collection<AuthorBook> authorBooks = this.getEntityManager()
 			.createQuery("SELECT a FROM AuthorBook a WHERE bookId = ?1")
 			.setParameter(1, bookId)
 			.getResultList();
+		return authorBooks.stream().map(ab -> ab.getAuthor()).collect(Collectors.toList());
 	}
 	public Collection<Author> getAuthors(Book book) { return this.getAuthors(book.getId()); }
 
 	@SuppressWarnings("unchecked")
 	public Collection<Book> getBooks(Long authorId) {
-		return this
+		Collection<AuthorBook> authorBooks = this
 			.getEntityManager()
 			.createQuery("SELECT a FROM AuthorBook a WHERE bookId = ?1")
 			.setParameter(1, authorId)
 			.getResultList();
+		return authorBooks.stream().map(ab -> ab.getBook()).collect(Collectors.toList());
 	}
 	public Collection<Book> getBooks(Author author) { return this.getBooks(author.getId()); }
 

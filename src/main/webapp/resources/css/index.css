@@ -1,0 +1,76 @@
+@charset "ISO-8859-1";
+
+.home-page {
+	display: flex;
+	flex-direction: row;
+	width: auto;
+	padding: 2em 2em 0 2em;
+	justify-content: space-between;
+}
+
+.home-page .last-added {
+	display: flex;
+	flex-direction: column;
+	width: fit-content;
+	max-width: 25%;
+}
+
+.home-page .last-added .last-added-title {
+	color: var(--dark-text-color);
+	font-size: 1.25em;
+	font-weight: 700;
+	width: fit-content;
+}
+
+.home-page .last-added .last-added-container:not(:last-child) {
+	margin-bottom: .2em;
+}
+
+.home-page .home-center {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.home-page .home-center .recomendation-container {
+	display: flex;
+	--recomendation-height: 15em;
+	width: 70%;
+}
+
+.home-page .home-center .recomendation-container .recomendation-img {
+	height: var(--recomendation-height);
+}
+
+.home-page .home-center .recomendation-container .recomendation-text-container {
+	display: flex;
+	width: 100%;
+
+	--padding-size: 1em;
+	padding: var(--padding-size);
+
+	height: calc(var(--recomendation-height) - (var(--padding-size) * 2));
+	background-color: var(--secondary-background-color);
+	flex-direction: column;
+	color: var(--dark-text-color);
+}
+
+.home-page .home-center .recomendation-container .recomendation-text-container .recomendation-title {
+	font-weight: 600;
+	font-size: 1.5em;
+}
+
+.home-page .home-center .recomendation-container .recomendation-text-container .recomendation-description {
+	text-align: justify;
+	overflow-y: auto;
+	margin-top: 1em;
+}
+
+.home-page .home-center .recomendation-container-title {
+	width: 70%;
+	color: var(--dark-text-color);
+	font-weight: 700;
+	font-size: 1.5em;
+	margin-bottom: .5em;
+}

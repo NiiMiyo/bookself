@@ -46,12 +46,29 @@ public class BookRepository extends Repository<Book> {
 	}
 
 	@SuppressWarnings("unchecked")
+	public Collection<Book> getLastAdded(Integer amount) {
+		return this
+			.getEntityManager()
+			.createQuery("SELECT b FROM Book b ORDER BY id DESC")
+			.setMaxResults(amount)
+			.getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
 	@Override
 	public Collection<Book> listAll() {
 		return this
 			.getEntityManager()
 			.createQuery("SELECT b FROM Book b")
 			.getResultList();
+	}
+
+	public Book getLivroAleatorio() {
+		return (Book) this
+			.getEntityManager()
+			.createQuery("SELECT b FROM Book b ORDER BY RANDOM()")
+			.setMaxResults(1)
+			.getResultList().iterator().next();
 	}
 
 	private BookRepository(String persistenceUnity) { super(persistenceUnity); }

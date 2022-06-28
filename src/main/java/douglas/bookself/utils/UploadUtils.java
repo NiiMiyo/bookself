@@ -6,9 +6,10 @@ import java.io.IOException;
 
 import javax.servlet.http.Part;
 
-public class UploadUtils {
-	private static final String coverPath = "D:/Douglas/Faculdade/AYTY/Onboarding ESIG/EclipseWorkspace2/bookself/src/main/webapp/resources/images/covers/";
+import douglas.bookself.servlet.CoversServlet;
 
+
+public class UploadUtils {
 	public static String saveCover(Part fileUpload) {
 		if (!fileUpload.getContentType().startsWith("image/"))
 			return null;
@@ -16,8 +17,8 @@ public class UploadUtils {
 		try {
 			String filename = UploadUtils.getFilename(fileUpload);
 			String fileId = currentTimeMillis() + "-" + filename;
-			fileUpload.write(UploadUtils.coverPath + fileId);
 
+			fileUpload.write(CoversServlet.COVERS_PATH + fileId);
 			return fileId;
 		} catch (IOException e) {
 			return null;

@@ -2,6 +2,7 @@ package douglas.bookself.models;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,6 +24,7 @@ public class Book implements Serializable {
 	@Column(nullable = false)
 	private String title;
 
+	@Column(length = 500)
 	private String description;
 
 	private String cover;
@@ -41,15 +43,26 @@ public class Book implements Serializable {
 		return AuthorBookRepository.getInstance().getAuthors(this.id);
 	}
 
+	public String getAuthorsNames() {
+		Collection<String> names = this
+			.getAuthors()
+			.stream()
+			.map(a -> a.getName())
+			.collect(Collectors.toList());
+		
+		return String.join(", ", names);
+	}
+
 	public String getDescription() { return this.description; }
 	public void setDescription(String description) { this.description = description; }
 
-	public String getCover() {
-		return cover == null
-			? "noimage.png"
-			: cover;
-	}
+	public String getCover() { return this.cover; }
 	public void setCover(String cover) { this.cover = cover; }
+	public String getCoverUrl() {
+		return this.getCover() == null
+			? "images/noimage.png"
+			: "covers/" + this.getCover();
+	}
 
 	public Integer getYear() { return year; }
 	public void setYear(Integer year) { this.year = year; }
