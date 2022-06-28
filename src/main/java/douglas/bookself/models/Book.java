@@ -27,6 +27,8 @@ public class Book implements Serializable {
 
 	private String cover;
 
+	private Integer year;
+
 	public Book() { super(); }
 
 	public long getId() { return this.id; }
@@ -48,4 +50,7 @@ public class Book implements Serializable {
 			: cover;
 	}
 	public void setCover(String cover) { this.cover = cover; }
+
+	public Integer getYear() { return year; }
+	public void setYear(Integer year) { this.year = year; }
 }

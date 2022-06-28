@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+<h:body>
+	<composite:interface />
+
+	<composite:implementation>
+		<div class="header">
+			<h:outputLink value="index.jsf">
+				<h:graphicImage styleClass="header-logo" library="images"
+					name="Bookself.svg" />
+			</h:outputLink>
+
+			<h:form styleClass="search-bar">
+				<h:inputText value="#{headerBean.searchText}"
+					styleClass="search-bar-input" required="true"
+					a:placeholder="Busque por titulo e autor" />
+
+				<h:commandButton action="#{headerBean.search}"
+					image="/resources/images/search.svg" styleClass="search-bar-icon" />
+			</h:form>
+
+			<div class="header-button-container">
+				<h:outputLink value="cadastrarlivro.jsf">
+					<h:graphicImage library="images" name="book-cadastro.svg"
+						styleClass="header-button" />
+				</h:outputLink>
+
+				<h:outputLink value="cadastrarautor.jsf">
+					<h:graphicImage library="images" name="author-cadastro.svg"
+						styleClass="header-button" />
+				</h:outputLink>
+			</div>
+		</div>
+	</composite:implementation>
+</h:body>
+</html>

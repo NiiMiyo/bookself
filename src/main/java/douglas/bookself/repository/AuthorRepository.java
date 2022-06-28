@@ -8,10 +8,11 @@ import douglas.bookself.models.Author;
 public class AuthorRepository extends Repository<Author> {
 	private static AuthorRepository instance;
 
-	public Author criarAutor(String name) {
+	public Author criarAutor(String name, String biography) {
 		Author author = new Author();
 
 		author.setName(name);
+		author.setBiography(biography);
 
 		this.getEntityManager().getTransaction().begin();
 		this.getEntityManager().persist(author);

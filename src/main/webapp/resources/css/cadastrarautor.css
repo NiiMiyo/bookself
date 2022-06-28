@@ -1,0 +1,91 @@
+@charset "ISO-8859-1";
+
+.cadastrar-autor {
+	width: 68%;
+	background-color: var(--secondary-background-color);
+	margin: auto;
+	display: flex;
+	flex-direction: column;
+	padding: 1% 3%;
+}
+
+.cadastrar-autor .cadastrar-title {
+	color: var(--dark-text-color);
+	font-weight: 800;
+	font-size: 1.75em;
+}
+
+.cadastrar-autor .cadastro-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+}
+
+.cadastrar-autor .cadastro-container .input-title-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	margin-bottom: 2em;
+}
+
+.cadastrar-autor .cadastro-container .input-title-container .input-title {
+	font-weight: 700;
+	font-size: 1.5em;
+	color: var(--dark-text-color);
+	margin-bottom: .75em;
+}
+
+.cadastrar-autor .cadastro-container .input-title-container .input-container {
+	display: flex;
+	align-items: center;
+	width: 50%;
+}
+
+.cadastrar-autor .cadastro-container .input-title-container .input-container .input-icon {
+	height: 1.5em;
+	padding: .35em .35em .35em .5em;
+	background-color: var(--button-background-color);
+	border-radius: var(--bigger-left-rounded)
+}
+
+.cadastrar-autor .cadastro-container .input-title-container .input-container .input-field {
+	height: 2.5em;
+	border-radius: var(--bigger-right-rounded);
+	border: none;
+	width: 100%;
+	background-color: var(--input-background-color);
+	overflow: auto;
+	color: var(--dark-text-color);
+	padding-left: 1em;
+}
+
+.cadastrar-autor .cadastro-container .input-title-container .input-container .input-field::placeholder {
+	font-style: italic;
+	color: var(--light-text-color);
+}
+
+.cadastrar-autor .cadastro-container .input-title-container .input-container .input-field.author-description {
+	border-radius: var(--bigger-border-radius);
+	resize: none;
+	height: 10em;
+	padding: 1em;
+	overflow-y: auto;
+}
+
+.cadastrar-autor .cadastro-container .finalizar-cadastro {
+	height: 2.5em;
+	width: 50%;
+	border-radius: var(--bigger-border-radius);
+	background-color: var(--button-background-color);
+	color: #fff;
+	border: none;
+	font-weight: 700;
+	cursor: pointer;
+}
+
+.cadastrar-autor .cadastro-container .input-title-container .error-message {
+	color: var(--custom-red);
+	font-style: italic;
+}

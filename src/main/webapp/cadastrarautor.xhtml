@@ -2,19 +2,65 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:co="http://java.sun.com/jsf/composite/templates"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
-	<h:body>
-		<h:form>
-			<h:panelGrid columns="3">
-				<f:facet name="header">Dados do autor</f:facet>
+<h:head>
+	<title>Bookself - Cadastrar autor</title>
+	<link rel="stylesheet" href="resources/css/global.css" />
+	<link rel="stylesheet" href="resources/css/header.css" />
+	<link rel="stylesheet" href="resources/css/cadastrarautor.css" />
+</h:head>
 
-				<h:outputLabel value="Nome" for="name" />
-				<h:inputText id="name" value="#{cadastrarAutorBean.name}" required="true" requiredMessage="O nome do autor deve ser informado" />
-				<h:message for="name"/>
-			</h:panelGrid>
+<h:body>
+	<co:header />
 
-			<h:commandButton action="#{cadastrarAutorBean.cadastrar}" value="Cadastrar autor" />
-		</h:form>
-	</h:body>
+	<h:form styleClass="cadastrar-autor">
+		<h:panelGroup
+			style="display: flex; flex-direction: row; justify-content: space-between; margin-bottom: 0.5em">
+			<div></div>
+
+			<h:outputText value="CADASTRAR AUTOR" styleClass="cadastrar-title" />
+
+			<h:outputLink value="index.jsf">
+				<h:graphicImage style="height: 2em"
+					value="/resources/images/go-home.svg" />
+			</h:outputLink>
+		</h:panelGroup>
+
+		<h:panelGroup styleClass="cadastro-container">
+			<h:panelGroup styleClass="input-title-container">
+				<h:outputText value="NOME DO AUTOR" styleClass="input-title" />
+				<h:panelGroup styleClass="input-container">
+
+					<h:graphicImage styleClass="input-icon"
+						value="/resources/images/cadastrar-autor-nome-icon.svg" />
+
+					<h:inputText value="#{cadastrarAutorBean.name}" id="name"
+						required="true"
+						requiredMessage="O nome do autor deve ser informado"
+						styleClass="input-field" a:placeholder="Insira o nome do autor" />
+				</h:panelGroup>
+				<h:message for="name" styleClass="error-message" />
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="input-title-container">
+				<h:outputText value="DESCRIÇÃO DO AUTOR" styleClass="input-title" />
+				<h:panelGroup styleClass="input-container">
+					<h:inputTextarea value="#{cadastrarAutorBean.biography}"
+						id="biography" required="true"
+						requiredMessage="A descrição do autor deve ser informada"
+						styleClass="input-field author-description"
+						a:placeholder="Insira a descrição do autor" />
+				</h:panelGroup>
+				<h:message for="biography" styleClass="error-message" />
+			</h:panelGroup>
+
+			<h:commandButton action="#{cadastrarAutorBean.cadastrar}"
+				value="FINALIZAR CADASTRO" styleClass="finalizar-cadastro" />
+		</h:panelGroup>
+	</h:form>
+</h:body>
 </html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:composite="http://java.sun.com/jsf/composite">
+
+<h:head>
+	<title>livrodestaque</title>
+</h:head>
+
+<h:body>
+	<composite:interface>
+		<composite:attribute name="imagename" default="noimage.png" />
+		<composite:attribute name="bookname" default="NOME DO LIVRO" />
+		<composite:attribute name="authorsname" default="Autores" />
+	</composite:interface>
+
+	<composite:implementation>
+		<h:panelGroup styleClass="destaque-container">
+			<h:graphicImage name="#{cc.attrs.imagename}" library="images"
+				styleClass="destaque-img" />
+
+			<h:outputText value="#{cc.attrs.bookname}" styleClass="destaque-name" />
+
+			<h:outputText value="#{cc.attrs.authorsname}"
+				styleClass="destaque-authors" />
+		</h:panelGroup>
+	</composite:implementation>
+</h:body>
+</html>

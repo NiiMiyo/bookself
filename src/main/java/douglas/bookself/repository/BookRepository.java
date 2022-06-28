@@ -19,12 +19,13 @@ public class BookRepository extends Repository<Book> {
 		return BookRepository.instance;
 	}
 
-	public Book criarLivro(String title, String description, Collection<Long> authors, String imageName) {
+	public Book criarLivro(String title, String description, Collection<Long> authors, String imageName, Integer year) {
 		Book book = new Book();
 
 		book.setTitle(title);
 		book.setDescription(description);
 		book.setCover(imageName);
+		book.setYear(year);
 
 		EntityManager em = this.getEntityManager();
 

@@ -23,6 +23,8 @@ public class Author implements Serializable {
 	@Column(nullable = false)
 	private String name;
 
+	private String biography;
+
 	public Author() { super(); }
 
 	public Long getId() { return this.id; }
@@ -30,6 +32,9 @@ public class Author implements Serializable {
 
 	public String getName() { return this.name; }
 	public void setName(String name) { this.name = name; }
+
+	public String getBiography() { return biography; }
+	public void setBiography(String biography) { this.biography = biography; }
 
 	public Collection<Book> getBooks() {
 		return AuthorBookRepository.getInstance().getBooks(this.id);

@@ -7,7 +7,7 @@ import java.io.IOException;
 import javax.servlet.http.Part;
 
 public class UploadUtils {
-	private static final String coverPath = "D:/Douglas/Faculdade/AYTY/Onboarding ESIG/EclipseWorkspace2/bookself/src/main/webapp/resources/images/";
+	private static final String coverPath = "D:/Douglas/Faculdade/AYTY/Onboarding ESIG/EclipseWorkspace2/bookself/src/main/webapp/resources/images/covers/";
 
 	public static String saveCover(Part fileUpload) {
 		if (!fileUpload.getContentType().startsWith("image/"))
@@ -24,7 +24,9 @@ public class UploadUtils {
 		}
 	}
 
-	private static String getFilename(Part file) {
+	public static String getFilename(Part file) {
+		if (file == null) return "";
+
 		for (String cd : file.getHeader("content-disposition").split(";")) {
 			cd = cd.trim();
 			if (cd.startsWith("filename=")) {

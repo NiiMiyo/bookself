@@ -4,20 +4,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:co="http://java.sun.com/jsf/composite/templates">
 
 	<f:loadBundle basename="resources.application" var="msg" />
 	
-	<head>
+	<h:head>
 		<title><h:outputText value="Bookself" /></title>
-	</head>
-	
-	<body>
-		<h3>
-			<h:outputText value="#{msg.welcomeHeading}" />
-		</h3>
-		<p>
-			<h:outputText value="#{msg.welcomeMessage}" />
-		</p>
-	</body>
+
+		<link rel="stylesheet" href="resources/css/global.css" />
+		<link rel="stylesheet" href="resources/css/header.css" />
+		<link rel="stylesheet" href="resources/css/livrodestaque.css" />
+	</h:head>
+
+	<h:body>
+		<co:header />
+		<co:livrodestaque authorsname="Hirohiko Araki" bookname="JoJo Vento Aureo"/>
+	</h:body>
 </html>

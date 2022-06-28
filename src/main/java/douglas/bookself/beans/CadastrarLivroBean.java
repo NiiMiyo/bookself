@@ -19,6 +19,7 @@ public class CadastrarLivroBean {
 	private String title;
 	private String description;
 	private Collection<String> selectedAuthors;
+	private Integer year;
 	private Part coverFile;
 
 	public CadastrarLivroBean() {
@@ -27,7 +28,7 @@ public class CadastrarLivroBean {
 		this.selectedAuthors = new ArrayList<>();
 	}
 
-	public void cadastrar() {
+	public String cadastrar() {
 		String imageName = UploadUtils.saveCover(this.coverFile);
 
 		if (imageName == null) {
@@ -38,7 +39,7 @@ public class CadastrarLivroBean {
 					new FacesMessage(
 						FacesMessage.SEVERITY_WARN, "Erro ao enviar imagem", "")
 					);
-			return;
+			return null;
 		}
 
 		BookRepository
@@ -47,8 +48,11 @@ public class CadastrarLivroBean {
 				this.title,
 				this.description,
 				this.getSelectedAuthorsIds(),
-				imageName
+				imageName,
+				this.year
 			);
+
+		return "index.jsf";
 	}
 
 	public Collection<Author> getAllAuthors() {
@@ -75,4 +79,11 @@ public class CadastrarLivroBean {
 
 	public Part getCoverFile() { return coverFile; }
 	public void setCoverFile(Part coverFile) { this.coverFile = coverFile; }
+	
+	public Integer getYear() { return year; }
+	public void setYear(Integer year) { this.year = year; }
+
+	public String getCoverFileName() {
+		return UploadUtils.getFilename(this.coverFile);
+	}
 }

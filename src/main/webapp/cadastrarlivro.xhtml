@@ -2,36 +2,136 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:co="http://java.sun.com/jsf/composite/templates"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
-	<h:body>
-		<h:form enctype="multipart/form-data" >
-			<h:panelGrid columns="3">
-				<f:facet name="header">Dados do livro</f:facet>
+<h:head>
+	<title>Bookself - Cadastrar livro</title>
+	<link rel="stylesheet" href="resources/css/global.css" />
+	<link rel="stylesheet" href="resources/css/header.css" />
+	<link rel="stylesheet" href="resources/css/cadastrarlivro.css" />
+</h:head>
 
-				<h:outputLabel value="Título" for="title" />
-				<h:inputText id="title" value="#{cadastrarLivroBean.title}" required="true" requiredMessage="O título do livro deve ser informado" />
-				<h:message for="title"/>
+<h:body>
+	<co:header />
 
-				<h:outputLabel value="Descrição" for="description" />
-				<h:inputTextarea id="description" value="#{cadastrarLivroBean.description}" required="true" requiredMessage="A descrição do livro deve ser informada" />
-				<h:message for="description"/>
+	<h:form enctype="multipart/form-data" styleClass="cadastrar-livro">
+		<h:panelGroup style="display:flex; flex-direction:column; width: 100%">
+			<h:panelGroup style="display: flex; flex-direction: row-reverse;">
+				<h:outputLink value="index.jsf">
+					<h:graphicImage style="height: 2em" value="/resources/images/go-home.svg" />
+				</h:outputLink>
+			</h:panelGroup>
 
-				<h:outputLabel value="Autores do livro" for="select-authors" />
+			<h:panelGroup style="display: flex; flex-direction: row; width: 100%">
+				<h:panelGroup styleClass="left-side">
+					<h2 class="cadastrar-title">CADASTRAR LIVRO</h2>
+					<div class="upload-container">
+						<h:graphicImage styleClass="cadastrar-image"
+							value="/resources/images/cadastrar-livro.svg" />
 
-				<h:selectManyCheckbox id="select-authors" value="#{cadastrarLivroBean.selectedAuthors}" required="false" requiredMessage="Precisa ter autor" >
-					<f:selectItems value="#{cadastrarLivroBean.allAuthors}" var="a" itemLabel="#{a.name}" itemValue="#{a.id}" />
-				</h:selectManyCheckbox>
+						<h:outputLabel value="UPLOAD" for="cover-file"
+							styleClass="upload-cover-button" />
+						<h:inputFile id="cover-file"
+							value="#{cadastrarLivroBean.coverFile}" required="true"
+							requiredMessage="A capa do livro deve ser informada"
+							style="display: none">
+						</h:inputFile>
+					</div>
 
-				<h:message for="select-authors"/>
+					<h:outputLabel value="ADICIONAR IMAGEM"
+						styleClass="adicionar-image-label" for="cover-file" />
+					<h:message for="cover-file" styleClass="error-message" />
+				</h:panelGroup>
 
-				<h:outputLabel value="Capa do livro" for="cover-file" />
-				<h:inputFile id="cover-file" value="#{cadastrarLivroBean.coverFile}" required="true" requiredMessage="A capa do livro deve ser informada">
-				</h:inputFile>
-				<h:message for="cover-file"/>
-			</h:panelGrid>
+				<h:panelGroup styleClass="right-side">
+					<h:panelGroup styleClass="title-container cadastro-label-group">
+						<h:outputLabel value="TÍTULO DO LIVRO" styleClass="cadastro-label"
+							for="title" />
 
-			<h:commandButton action="#{cadastrarLivroBean.cadastrar}" value="Cadastrar livro" />
-		</h:form>
-	</h:body>
+						<h:panelGroup styleClass="input-group">
+							<h:graphicImage styleClass="input-icon"
+								value="/resources/images/cadastrar-livro-titulo-icon.svg" />
+
+							<h:inputText value="#{cadastrarLivroBean.title}" id="title"
+								required="true"
+								requiredMessage="O título do livro deve ser informado"
+								styleClass="input-field"
+								a:placeholder="Insira o título do livro" />
+						</h:panelGroup>
+
+						<h:message for="title" styleClass="error-message" />
+					</h:panelGroup>
+
+					<h:panelGroup styleClass="author-container cadastro-label-group">
+						<h:outputLabel value="AUTORES" styleClass="cadastro-label"
+							for="authors" />
+
+						<h:panelGroup styleClass="input-group">
+							<h:graphicImage styleClass="input-icon authors-input-icon"
+								value="/resources/images/cadastrar-livro-autor-icon.svg" />
+
+							<div class="authors-input-field-container">
+								<h:selectManyCheckbox
+									value="#{cadastrarLivroBean.selectedAuthors}" id="authors"
+									required="true"
+									requiredMessage="Os autores do livro devem ser informados"
+									styleClass="input-field authors-input-field"
+									enabledClass="authors-input-option">
+
+									<f:selectItems value="#{cadastrarLivroBean.allAuthors}" var="a"
+										itemLabel="#{a.name}" itemValue="#{a.id}" />
+								</h:selectManyCheckbox>
+							</div>
+						</h:panelGroup>
+						<h:message for="authors" styleClass="error-message" />
+					</h:panelGroup>
+
+					<h:panelGroup styleClass="description-year-container">
+						<h:panelGroup class="cadastro-label-group">
+							<h:outputLabel value="DESCRIÇÃO DO LIVRO"
+								styleClass="cadastro-label" for="description" />
+
+							<h:inputTextarea value="#{cadastrarLivroBean.description}"
+								id="description"
+								styleClass="description-input-field input-field" required="true"
+								requiredMessage="A descrição do livro deve ser informada"
+								a:placeholder="Insira a descrição do livro" />
+
+							<h:message for="description" styleClass="error-message" />
+						</h:panelGroup>
+
+						<h:panelGroup styleClass="ano-finalizar-container">
+							<h:panelGroup class="cadastro-label-group ano-label-group">
+								<h:outputLabel value="ANO DE PUBLICAÇÃO"
+									styleClass="cadastro-label" for="year" />
+
+								<h:panelGroup styleClass="input-group">
+									<h:graphicImage styleClass="input-icon"
+										value="/resources/images/cadastrar-livro-ano-icon.svg" />
+
+									<h:inputText value="#{cadastrarLivroBean.year}" id="year"
+										styleClass="year-input-field input-field" required="true"
+										requiredMessage="O ano de publicação do livro deve ser informado"
+										converterMessage="Deve ser informado um número"
+										a:placeholder="Insira o ano de publicação do livro">
+										<f:convertNumber integerOnly="true" />
+									</h:inputText>
+								</h:panelGroup>
+
+								<h:message for="year" styleClass="error-message" />
+							</h:panelGroup>
+
+
+							<h:commandButton action="#{cadastrarLivroBean.cadastrar}"
+								value="FINALIZAR CADASTRO" styleClass="finalizar-cadastro" />
+						</h:panelGroup>
+					</h:panelGroup>
+				</h:panelGroup>
+			</h:panelGroup>
+		</h:panelGroup>
+	</h:form>
+</h:body>
 </html>
