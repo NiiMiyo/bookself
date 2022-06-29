@@ -84,6 +84,16 @@ public class BookRepository extends Repository<Book> {
 			.getResultList();
 	}
 
+	public void deletarLivro(Book book) {
+		AuthorBookRepository
+			.getInstance()
+			.deletarRelacoes(book);
+
+		this.getEntityManager().getTransaction().begin();
+		this.getEntityManager().remove(book);
+		this.getEntityManager().getTransaction().commit();
+	}
+
 	private BookRepository(String persistenceUnity) { super(persistenceUnity); }
 	private BookRepository() { super(); }
 }

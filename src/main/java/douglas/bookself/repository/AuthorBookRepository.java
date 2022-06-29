@@ -11,6 +11,19 @@ import douglas.bookself.models.Book;
 public class AuthorBookRepository extends Repository<AuthorBook> {
 	private static AuthorBookRepository instance;
 
+	public void deletarRelacoes(Book book) {
+		Collection<AuthorBook> relations = this.listAll()
+				.stream()
+				.filter(ab -> ab.getBookId().equals(book.getId()))
+				.collect(Collectors.toList());
+
+		for (AuthorBook authorBook : relations) {
+			this.getEntityManager().getTransaction().begin();
+			this.getEntityManager().remove(authorBook);
+			this.getEntityManager().getTransaction().commit();
+		}
+	}
+
 	public Collection<AuthorBook> criarRelacao(Long bookId, Collection<Long> authorId) {
 		Collection<AuthorBook> registered = new ArrayList<>();
 

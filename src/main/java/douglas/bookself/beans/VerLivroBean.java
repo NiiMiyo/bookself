@@ -38,10 +38,17 @@ public class VerLivroBean {
 			: null;
 	}
 
+	public String deletarLivro() {
+		BookRepository.getInstance().deletarLivro(book);
+		this.book = null;
+
+		return "index.jsf";
+	}
+
 	public String getTitle() { return book.getTitle(); }
 	public String getAuthorsNames() { return book.getAuthorsNames(); }
 	public Collection<Author> getAuthors() { return book.getAuthors(); }
 	public String getDescription() { return book.getDescription(); }
 	public String getCoverUrl() { return book.getCoverUrl(); }
-	public Integer getYer() { return book.getYear(); }
+	public Integer getYear() { return book.getYear(); }
 }

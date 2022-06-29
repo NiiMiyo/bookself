@@ -33,17 +33,17 @@
 						<ui:repeat var="a" value="#{verLivroBean.authors}">
 							<h:outputText value="#{a.name}" styleClass="author-name" />
 						</ui:repeat>
+						<h:outputText value="&nbsp;- #{verLivroBean.year}" />
 					</h:panelGroup>
 				</h:panelGroup>
 
 				<h:outputText value="#{verLivroBean.description}" styleClass="description"/>
-
 			</h:panelGroup>
 		</h:panelGroup>
 
 		<h:panelGroup styleClass="buttons-container">
 			<h:commandLink value="EDITAR LIVRO" styleClass="ver-livro-edit" />
-			<h:commandButton image="/resources/images/delete.svg" styleClass="ver-livro-delete" />
+			<h:commandButton action="#{verLivroBean.deletarLivro}" image="/resources/images/delete.svg" styleClass="ver-livro-delete" />
 		</h:panelGroup>
 	</h:form>
 </h:body>
