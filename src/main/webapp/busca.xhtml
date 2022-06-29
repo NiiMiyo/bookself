@@ -25,13 +25,19 @@
 			value="Foram encontrados #{pesquisaBean.quantityFound} resultados"
 			styleClass="search-quantity" />
 
-		<h:panelGroup styleClass="results-container">
+		<h:form styleClass="results-container">
 			<ui:repeat var="b" value="#{pesquisaBean.resultadosDaPesquisa}">
 				<h:panelGroup styleClass="result-item">
-					<h:graphicImage value="#{b.coverUrl}" styleClass="result-item-img" />
+
+					<h:commandLink styleClass="result-item-img"
+						action="#{verLivroBean.irParaLivro(b)}">
+						<h:graphicImage value="#{b.coverUrl}" style="width: 100%" />
+					</h:commandLink>
 
 					<h:panelGroup styleClass="result-item-text-container">
-						<h:outputText value="#{b.title}" styleClass="result-item-title" />
+						<h:commandLink
+							action="#{verLivroBean.irParaLivro(b)}"
+							value="#{b.title}" styleClass="result-item-title" />
 
 						<h:outputText value="Escrito por #{b.authorsNames}"
 							styleClass="result-item-author" />
@@ -42,7 +48,7 @@
 					</h:panelGroup>
 				</h:panelGroup>
 			</ui:repeat>
-		</h:panelGroup>
+		</h:form>
 	</h:panelGroup>
 </h:body>
 

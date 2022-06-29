@@ -12,6 +12,8 @@
 	font-weight: 700;
 	font-size: 2em;
 	text-transform: uppercase;
+	text-decoration: none;
+	color: var(--dark-text-color);
 }
 
 .search-page-container .search-quantity {
