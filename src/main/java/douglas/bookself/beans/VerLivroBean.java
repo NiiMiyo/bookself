@@ -45,6 +45,7 @@ public class VerLivroBean {
 		return "index.jsf";
 	}
 
+	public Book getBook() { return this.book; }
 	public String getTitle() { return book.getTitle(); }
 	public String getAuthorsNames() { return book.getAuthorsNames(); }
 	public Collection<Author> getAuthors() { return book.getAuthors(); }

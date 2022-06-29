@@ -43,6 +43,11 @@ public class AuthorBookRepository extends Repository<AuthorBook> {
 		return registered;
 	}
 
+	public void criarRelacao(Book book, Collection<Author> authors) {
+		Collection<Long> ids = authors.stream().map(a -> a.getId()).collect(Collectors.toList());
+		this.criarRelacao(book.getId(), ids);
+	}
+
 	@SuppressWarnings("unchecked")
 	public Collection<Author> getAuthors(Long bookId) {
 		Collection<AuthorBook> authorBooks = this.getEntityManager()

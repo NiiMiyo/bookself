@@ -26,17 +26,17 @@
 				</h:commandButton>
 			</h:form>
 
-			<div class="header-button-container">
-				<h:outputLink value="cadastrarlivro.jsf">
+			<h:form class="header-button-container">
+				<h:commandLink action="#{cadastrarLivroBean.irParaCadastrarLivro}" title="Cadastrar novo livro">
 					<h:graphicImage library="images" name="book-cadastro.svg"
-						styleClass="header-button" />
-				</h:outputLink>
+						styleClass="header-button" alt="Cadastrar novo livro" />
+				</h:commandLink>
 
 				<h:outputLink value="cadastrarautor.jsf">
 					<h:graphicImage library="images" name="author-cadastro.svg"
 						styleClass="header-button" />
 				</h:outputLink>
-			</div>
+			</h:form>
 		</div>
 	</composite:implementation>
 </h:body>

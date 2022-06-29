@@ -42,6 +42,10 @@ public class Book implements Serializable {
 	public Collection<Author> getAuthors() {
 		return AuthorBookRepository.getInstance().getAuthors(this.id);
 	}
+	public void setAuthors(Collection<Author> authors) {
+		AuthorBookRepository.getInstance().deletarRelacoes(this);
+		AuthorBookRepository.getInstance().criarRelacao(this, authors);
+	}
 
 	public String getAuthorsNames() {
 		Collection<String> names = this
@@ -60,7 +64,7 @@ public class Book implements Serializable {
 	public void setCover(String cover) { this.cover = cover; }
 	public String getCoverUrl() {
 		return this.getCover() == null
-			? "images/noimage.png"
+			? "resources/images/noimage.png"
 			: "covers/" + this.getCover();
 	}
 

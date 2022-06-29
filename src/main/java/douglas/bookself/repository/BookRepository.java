@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
 
+import douglas.bookself.models.Author;
 import douglas.bookself.models.Book;
 
 public class BookRepository extends Repository<Book> {
@@ -19,7 +20,21 @@ public class BookRepository extends Repository<Book> {
 		return BookRepository.instance;
 	}
 
-	public Book criarLivro(String title, String description, Collection<Long> authors, String imageName, Integer year) {
+	public Book criarLivro(Book book) {
+		EntityManager em = this.getEntityManager();
+
+		em.getTransaction().begin();
+		book = em.merge(book);
+		em.getTransaction().commit();
+
+		Collection<Author> authors = book.getAuthors();
+
+		AuthorBookRepository.getInstance().deletarRelacoes(book);
+		AuthorBookRepository.getInstance().criarRelacao(book, authors);
+		return book;
+	}
+
+	public Book criarLivro(String title, String description, Collection<Long> authorsIds, String imageName, Integer year) {
 		Book book = new Book();
 
 		book.setTitle(title);
@@ -27,14 +42,10 @@ public class BookRepository extends Repository<Book> {
 		book.setCover(imageName);
 		book.setYear(year);
 
-		EntityManager em = this.getEntityManager();
+		Collection<Author> authors = AuthorRepository.getInstance().getWithId(authorsIds);
+		book.setAuthors(authors);
 
-		em.getTransaction().begin();
-		em.persist(book);
-		em.getTransaction().commit();
-
-		AuthorBookRepository.getInstance().criarRelacao(book.getId(), authors);
-		return book;
+		return this.criarLivro(book);
 	}
 
 	public Collection<Book> getWithId(Collection<Long> ids) {
