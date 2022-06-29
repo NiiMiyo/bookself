@@ -19,6 +19,8 @@
 .last-added-container .last-added-text-container .last-added-bookname {
 	color: var(--dark-text-color);
 	font-weight: 600;
+
+	text-decoration: none;
 }
 
 .last-added-container .last-added-text-container .last-added-authors {

@@ -21,8 +21,9 @@
 					styleClass="search-bar-input" required="true"
 					a:placeholder="Busque por titulo e autor" />
 
-				<h:commandButton action="#{headerBean.search}"
-					image="/resources/images/search.svg" styleClass="search-bar-icon" />
+				<h:commandButton action="#{pesquisaBean.irParaBusca(headerBean.searchText)}"
+					image="/resources/images/search.svg" styleClass="search-bar-icon">
+				</h:commandButton>
 			</h:form>
 
 			<div class="header-button-container">

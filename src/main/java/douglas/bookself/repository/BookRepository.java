@@ -71,6 +71,19 @@ public class BookRepository extends Repository<Book> {
 			.getResultList().iterator().next();
 	}
 
+	@SuppressWarnings("unchecked")
+	public Collection<Book> pesquisarLivros(String query) {
+		return this
+			.getEntityManager()
+			.createQuery("SELECT b "
+					+ "FROM Book b LEFT JOIN AuthorBook ab ON b.id = ab.bookId "
+					+ "LEFT JOIN Author a ON ab.authorId = a.id "
+					+ "WHERE LOWER(b.title) LIKE LOWER(?1) "
+					+ "OR LOWER(a.name) LIKE LOWER(?1)")
+			.setParameter(1, "%" + query + "%")
+			.getResultList();
+	}
+
 	private BookRepository(String persistenceUnity) { super(persistenceUnity); }
 	private BookRepository() { super(); }
 }

@@ -1,0 +1,92 @@
+@charset "ISO-8859-1";
+
+.ver-livro {
+	width: 68%;
+
+	background-color: var(--secondary-background-color);
+	border-radius: var(--smaller-border-radius);
+
+	margin: auto;
+	display: flex;
+	flex-direction: column;
+	padding: 2% 7.5%;
+	align-items: center;
+
+	--img-width: 25%;
+}
+
+.ver-livro .ver-livro-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+
+	width: 100%;
+}
+
+.ver-livro .ver-livro-container .ver-livro-img {
+	width: var(--img-width);
+}
+
+.ver-livro .ver-livro-container .ver-livro-text-container {
+	--img-distance: 1.5em;
+
+	margin-left: var(--img-distance);
+	display: flex;
+	flex-direction: column;
+	width: calc(100% - var(--img-width) - var(--img-distance));
+}
+
+.ver-livro .ver-livro-container .ver-livro-text-container .ver-livro-title {
+	font-size: 2.25em;
+	font-weight: 800;
+}
+
+.ver-livro .ver-livro-container .ver-livro-text-container .authors-container {
+	display: flex;
+	flex-direction: row;
+	color: var(--light-text-color);
+}
+
+.ver-livro .ver-livro-container .ver-livro-text-container .authors-container .author-name:not(:last-child)::after {
+	content: ",\a0"
+}
+
+.ver-livro .ver-livro-container .ver-livro-text-container .description {
+	--padding-size: 1.5em;
+
+	width: 100%;
+	height: calc(100% - (var(--padding-size) * 2));
+	padding: var(--padding-size) 0;
+
+	display: flex;
+	align-items: center;
+	overflow-y: auto;
+}
+
+.ver-livro .buttons-container {
+	display: flex;
+	justify-content: space-between;
+	flex-direction: row;
+	width: 100%;
+	margin-top: 1em;
+}
+
+.ver-livro .buttons-container .ver-livro-edit {
+	--padding-size: .75em;
+	width: var(--img-width);
+	padding: var(--padding-size) 0;
+
+	background-color: var(--button-background-color);
+	color: #fff;
+	border-radius: var(--bigger-border-radius);
+
+	font-weight: 700;
+	text-align: center;
+	font-size: 1.25em;
+	text-decoration: none;
+}
+
+.ver-livro .buttons-container .ver-livro-delete {
+	height: 2em;
+	margin-top: auto;
+}

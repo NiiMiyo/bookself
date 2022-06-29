@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:co="http://java.sun.com/jsf/composite/templates">
+
+<h:head>
+	<title>Bookself - Busca por '#{pesquisaBean.query}'</title>
+	<link rel="stylesheet" href="resources/css/global.css" />
+	<link rel="stylesheet" href="resources/css/header.css" />
+	<link rel="stylesheet" href="resources/css/busca.css" />
+</h:head>
+
+<h:body>
+	<co:header />
+
+	<h:panelGroup styleClass="search-page-container">
+		<h:outputText
+			value="RESULTADOS DA PESQUISA POR '#{pesquisaBean.query}'"
+			styleClass="search-title" />
+
+		<h:outputText
+			value="Foram encontrados #{pesquisaBean.quantityFound} resultados"
+			styleClass="search-quantity" />
+
+		<h:panelGroup styleClass="results-container">
+			<ui:repeat var="b" value="#{pesquisaBean.resultadosDaPesquisa}">
+				<h:panelGroup styleClass="result-item">
+					<h:graphicImage value="#{b.coverUrl}" styleClass="result-item-img" />
+
+					<h:panelGroup styleClass="result-item-text-container">
+						<h:outputText value="#{b.title}" styleClass="result-item-title" />
+
+						<h:outputText value="Escrito por #{b.authorsNames}"
+							styleClass="result-item-author" />
+
+						<h:outputText value="#{b.description}"
+							styleClass="result-item-description" />
+
+					</h:panelGroup>
+				</h:panelGroup>
+			</ui:repeat>
+		</h:panelGroup>
+	</h:panelGroup>
+</h:body>
+
+</html>

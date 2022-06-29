@@ -3,6 +3,7 @@
 .cadastrar-livro {
 	width: 68%;
 	background-color: var(--secondary-background-color);
+	border-radius: var(--smaller-border-radius);
 	margin: auto;
 	display: flex;
 	flex-direction: row;

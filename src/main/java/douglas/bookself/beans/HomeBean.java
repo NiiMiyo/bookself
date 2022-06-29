@@ -18,9 +18,13 @@ public class HomeBean {
 	}
 
 	public Book getRecomendation() {
-		if (this.recomendation == null) {
-			this.recomendation = BookRepository.getInstance().getLivroAleatorio();
-		}
+		if (this.recomendation == null)
+			this.reloadRecomendation();
+
 		return this.recomendation;
+	}
+
+	public void reloadRecomendation() {
+		this.recomendation = BookRepository.getInstance().getLivroAleatorio();
 	}
 }

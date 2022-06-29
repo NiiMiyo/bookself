@@ -14,6 +14,8 @@
 	--bigger-border-radius: 13px;
 	--bigger-left-rounded: var(--bigger-border-radius) 0 0 var(--bigger-border-radius);
 	--bigger-right-rounded: 0 var(--bigger-border-radius) var(--bigger-border-radius) 0;
+
+	--smaller-border-radius: 5px;
 }
 
 body {

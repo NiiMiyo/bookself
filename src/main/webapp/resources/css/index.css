@@ -54,11 +54,15 @@
 	background-color: var(--secondary-background-color);
 	flex-direction: column;
 	color: var(--dark-text-color);
+
+	border-radius: 0 var(--smaller-border-radius) var(--smaller-border-radius) 0;
 }
 
 .home-page .home-center .recomendation-container .recomendation-text-container .recomendation-title {
 	font-weight: 600;
 	font-size: 1.5em;
+	text-decoration: none;
+	color: var(--dark-text-color);
 }
 
 .home-page .home-center .recomendation-container .recomendation-text-container .recomendation-description {

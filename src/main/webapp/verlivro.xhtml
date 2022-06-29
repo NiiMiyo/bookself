@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:co="http://java.sun.com/jsf/composite/templates">
+
+<h:head>
+	<title>Bookself - #{verLivroBean.title}</title>
+	<link rel="stylesheet" href="resources/css/global.css" />
+	<link rel="stylesheet" href="resources/css/header.css" />
+	<link rel="stylesheet" href="resources/css/verlivro.css" />
+</h:head>
+
+<h:body onload="#{verLivroBean.validate()}">
+	<co:header />
+
+	<h:form styleClass="ver-livro">
+
+		<h:outputLink value="index.jsf" style="margin-left: auto">
+			<h:graphicImage style="height: 2em"
+				value="/resources/images/go-home.svg" />
+		</h:outputLink>
+
+		<h:panelGroup styleClass="ver-livro-container">
+			<h:graphicImage value="#{verLivroBean.coverUrl}"
+				styleClass="ver-livro-img" />
+
+			<h:panelGroup styleClass="ver-livro-text-container">
+				<h:panelGroup>
+					<h:outputText value="#{verLivroBean.title}" styleClass="ver-livro-title" />
+					<h:panelGroup styleClass="authors-container">
+						<ui:repeat var="a" value="#{verLivroBean.authors}">
+							<h:outputText value="#{a.name}" styleClass="author-name" />
+						</ui:repeat>
+					</h:panelGroup>
+				</h:panelGroup>
+
+				<h:outputText value="#{verLivroBean.description}" styleClass="description"/>
+
+			</h:panelGroup>
+		</h:panelGroup>
+
+		<h:panelGroup styleClass="buttons-container">
+			<h:commandLink value="EDITAR LIVRO" styleClass="ver-livro-edit" />
+			<h:commandButton image="/resources/images/delete.svg" styleClass="ver-livro-delete" />
+		</h:panelGroup>
+	</h:form>
+</h:body>
+</html>
