@@ -2,12 +2,15 @@ package douglas.bookself.models;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 
@@ -29,7 +32,11 @@ public class Book implements Serializable {
 
 	private Integer year;
 
-	@ManyToMany(mappedBy = "books")
+	@ManyToMany
+	@JoinTable(
+		joinColumns = @JoinColumn(name = "book_id"),
+		inverseJoinColumns = @JoinColumn(name = "author_id")
+	)
 	private Collection<Author> authors;
 
 	public Book() { super(); }
@@ -56,4 +63,12 @@ public class Book implements Serializable {
 
 	public Collection<Author> getAuthors() { return authors; }
 	public void setAuthors(Collection<Author> authors) { this.authors = authors; }
+	public String getAuthorsNames() {
+		Collection<String> names = this.authors
+			.stream()
+			.map(a -> a.getName())
+			.collect(Collectors.toList());
+
+		return String.join(", ", names);
+	}
 }

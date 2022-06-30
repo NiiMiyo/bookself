@@ -16,7 +16,7 @@ public class CadastrarAutorBean {
 	}
 	
 	public String cadastrar() {
-		AuthorRepository.getInstance().criarAutor(this.name, this.biography);
+		AuthorRepository.createAuthor(this.name, this.biography);
 		return "index.jsf";
 	}
 

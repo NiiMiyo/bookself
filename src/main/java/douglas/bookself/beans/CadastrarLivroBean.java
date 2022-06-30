@@ -1,12 +1,11 @@
 package douglas.bookself.beans;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 import javax.servlet.http.Part;
 
 import douglas.bookself.models.Author;
@@ -39,32 +38,15 @@ public class CadastrarLivroBean {
 	}
 
 	public String cadastrar() {
-		String imageName = UploadUtils.saveCover(this.getCoverFile());
+		book.setCover( UploadUtils.saveCover(this.getCoverFile()) );
 
-		if (imageName == null) {
-			FacesContext
-				.getCurrentInstance()
-				.addMessage(
-					"cover-file",
-					new FacesMessage(
-						FacesMessage.SEVERITY_WARN, "Erro ao enviar imagem", "")
-					);
-			return null;
-		}
-
-		book.setCover(imageName);
-
-		BookRepository
-			.getInstance()
-			.criarLivro(book);
+		BookRepository.createOrAlterBook(book);
 
 		return "index.jsf";
 	}
 
 	public Collection<Author> getAllAuthors() {
-		return AuthorRepository
-			.getInstance()
-			.listAll();
+		return AuthorRepository.getAllAuthors();
 	}
 
 	public Collection<Long> getSelectedAuthorsIds() {
@@ -81,23 +63,22 @@ public class CadastrarLivroBean {
 	public void setDescription(String description) { this.book.setDescription(description); }
 
 	public Collection<String> getSelectedAuthors() {
-		return this
-			.book
-			.getAuthors()
-			.stream()
-			.map(a -> a.getId().toString())
-			.collect(Collectors.toList());
+		if (this.book.getAuthors() != null)
+			return this.book
+				.getAuthors()
+				.stream()
+				.map(a -> a.getId().toString())
+				.collect(Collectors.toList());
+
+		else
+			return new ArrayList<>();
 	}
 
 	public void setSelectedAuthors(Collection<String> selectedAuthors) {
-		Collection<Long> ids = selectedAuthors
+		Collection<Author> authors = selectedAuthors
 			.stream()
-			.map(a -> Long.parseLong(a))
+			.map(a -> AuthorRepository.findById( Long.parseLong(a) ))
 			.collect(Collectors.toList());
-
-		Collection<Author> authors = AuthorRepository
-			.getInstance()
-			.getWithId(ids);
 
 		this.book.setAuthors(authors);
 	}

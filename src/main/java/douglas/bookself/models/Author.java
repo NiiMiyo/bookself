@@ -27,11 +27,7 @@ public class Author implements Serializable {
 	@Column(length = 500)
 	private String biography;
 
-	@ManyToMany
-	@JoinTable(
-		joinColumns = @JoinColumn(name = "author_id"),
-		inverseJoinColumns = @JoinColumn(name = "book_id")
-	)
+	@ManyToMany(mappedBy = "authors")
 	private Collection<Book> books;
 
 	public Author() { super(); }
