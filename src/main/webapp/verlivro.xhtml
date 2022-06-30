@@ -51,7 +51,11 @@
 		</h:panelGroup>
 
 		<h:panelGroup styleClass="buttons-container">
-			<h:commandLink action="#{cadastrarLivroBean.irParaEditarLivro(verLivroBean.book)}" value="EDITAR LIVRO" styleClass="ver-livro-edit" />
+			<h:outputLink value="cadastrarlivro.jsf" styleClass="ver-livro-edit">
+				<f:param name="edit" value="#{verLivroBean.id}" />
+				EDITAR LIVRO
+			</h:outputLink>
+
 			<h:commandButton action="#{verLivroBean.deletarLivro}" image="/resources/images/delete.svg" styleClass="ver-livro-delete" />
 		</h:panelGroup>
 	</h:form>

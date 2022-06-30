@@ -5,7 +5,10 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
 
 import douglas.bookself.models.Author;
@@ -15,16 +18,34 @@ import douglas.bookself.repository.BookRepository;
 import douglas.bookself.utils.UploadUtils;
 
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class CadastrarLivroBean {
 	private Book book;
 
 	private Part coverFile;
 
-	public CadastrarLivroBean() {
-		this.book = new Book();
+	public CadastrarLivroBean() { }
+
+	public void carregarLivro() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletRequest myRequest = (HttpServletRequest) context.getExternalContext().getRequest();
+		String editBookId = myRequest.getParameter("edit");
+
+		boolean err = false;
+		try {
+			Long id = Long.parseLong(editBookId);
+			this.book = BookRepository.findById(id);
+
+			err = (this.book == null);
+		} catch(NumberFormatException e) {
+			err = true;
+		}
+
+		if (err)
+			this.book = new Book();
 	}
 
+	/*
 	public String irParaEditarLivro(Book book) {
 		if (book == null) return null;
 
@@ -36,6 +57,7 @@ public class CadastrarLivroBean {
 		this.book = new Book();
 		return "cadastrarlivro.jsf";
 	}
+	*/
 
 	public String cadastrar() {
 		book.setCover( UploadUtils.saveCover(this.getCoverFile()) );

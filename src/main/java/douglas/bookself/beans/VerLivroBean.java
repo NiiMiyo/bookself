@@ -44,6 +44,7 @@ public class VerLivroBean {
 	}
 
 	public Book getBook() { return this.book; }
+	public Long getId() { return this.book.getId(); }
 	public String getTitle() { return book.getTitle(); }
 	public String getAuthorsNames() { return book.getAuthorsNames(); }
 	public Collection<Author> getAuthors() { return book.getAuthors(); }

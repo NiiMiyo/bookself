@@ -7,6 +7,10 @@
 	xmlns:co="http://java.sun.com/jsf/composite/templates"
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
+<f:metadata>
+	<f:event type="preRenderView" listener="#{cadastrarLivroBean.carregarLivro()}" />
+</f:metadata>
+
 <h:head>
 	<title>Bookself - Cadastrar livro</title>
 
