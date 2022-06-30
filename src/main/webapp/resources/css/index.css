@@ -69,6 +69,7 @@
 	text-align: justify;
 	overflow-y: auto;
 	margin-top: 1em;
+	padding-right: .5em;
 }
 
 .home-page .home-center .recomendation-container-title {

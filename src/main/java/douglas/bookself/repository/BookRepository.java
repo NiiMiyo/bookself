@@ -28,6 +28,9 @@ public class BookRepository extends Repository {
 	public static Book createOrAlterBook(Book book) {
 		EntityManager em = BookRepository.createEntityManager();
 
+		book.setTitle(book.getTitle().trim());
+		book.setDescription(book.getDescription().trim());
+
 		em.getTransaction().begin();
 		book = em.merge(book);
 		em.getTransaction().commit();

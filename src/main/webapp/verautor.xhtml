@@ -40,7 +40,7 @@
 			<h:panelGroup styleClass="author-books">
 				<ui:repeat var="b" value="#{verAutorBean.books}">
 
-					<h:outputLink value="verlivro.jsf">
+					<h:outputLink value="verlivro.jsf" title="#{b.title}">
 						<f:param name="#{verLivroBean.viewParamName}" value="#{b.id}" />
 						<h:graphicImage value="#{b.coverUrl}" styleClass="book-item-img" />
 					</h:outputLink>

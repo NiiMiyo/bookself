@@ -71,7 +71,7 @@
 	grid-template-columns: repeat(3, 1fr);
 	row-gap: var(--row-gap);
 
-	height: calc(var(--img-height) * var(--showing-rows)) + (var(--row-gap) * (var(--showing-rows) - 1));
+	height: 17em;
 	overflow-y: auto;
 }
 

@@ -44,20 +44,6 @@ public class CadastrarLivroBean {
 			this.book = new Book();
 	}
 
-	/*
-	public String irParaEditarLivro(Book book) {
-		if (book == null) return null;
-
-		this.book = book;
-		return "cadastrarlivro.jsf";
-	}
-
-	public String irParaCadastrarLivro() {
-		this.book = new Book();
-		return "cadastrarlivro.jsf";
-	}
-	*/
-
 	public String cadastrar() {
 		book.setCover( UploadUtils.saveCover(this.getCoverFile()) );
 
