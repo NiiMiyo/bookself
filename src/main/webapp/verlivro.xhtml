@@ -38,7 +38,7 @@
 					<h:panelGroup styleClass="authors-container">
 						<ui:repeat var="a" value="#{verLivroBean.authors}">
 							<h:outputLink value="verautor.jsf" styleClass="author-name">
-								<f:param name="author_id" value="#{a.id}" />
+								<f:param name="#{verAutorBean.viewParamName}" value="#{a.id}" />
 								#{a.name}
 							</h:outputLink>
 						</ui:repeat>

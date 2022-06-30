@@ -1,10 +1,12 @@
 package douglas.bookself.beans;
 
-import java.util.Arrays;
+import java.io.IOException;
 import java.util.Collection;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 import douglas.bookself.models.Author;
 import douglas.bookself.models.Book;
@@ -14,28 +16,35 @@ import douglas.bookself.repository.AuthorRepository;
 @SessionScoped
 public class VerAutorBean {
 	private Author author;
+	public static final String VIEW_ID_PARAM_NAME = "author";
 
-	public String irParaAutorComId(String authorId) {
-		Author author = AuthorRepository
-			.getInstance()
-			.getWithId(Arrays.asList(Long.parseLong(authorId)))
-			.iterator()
-			.next();
-
-		return this.irParaAutor(author);
+	public String getViewParamName() {
+		return VerAutorBean.VIEW_ID_PARAM_NAME;
 	}
 
-	public String irParaAutor(Author author) {
-		if (author == null) return null;
+	public void carregarAutor() throws IOException {
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletRequest myRequest = (HttpServletRequest) context.getExternalContext().getRequest();
+		String idString = myRequest.getParameter(VerAutorBean.VIEW_ID_PARAM_NAME);
 
-		this.author = author;
-		return "verautor.jsf";
+		boolean err = false;
+		try {
+			Long id = Long.parseLong(idString);
+			this.author = AuthorRepository.findById(id);
+
+			err = (this.author == null);
+		} catch(NumberFormatException e) {
+			err = true;
+		}
+
+		if (err)
+			FacesContext.getCurrentInstance().getExternalContext().redirect("index.jsf");
 	}
 
 	public String deletarAutor() {
-		AuthorRepository.getInstance().deletarAutor(author);
-		this.author = null;
+		AuthorRepository.deleteAuthor(author);
 
+		this.author = null;
 		return "index.jsf";
 	}
 

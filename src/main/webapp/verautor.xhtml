@@ -14,17 +14,23 @@
 	<link rel="stylesheet" href="resources/css/verautor.css" />
 </h:head>
 
+<f:metadata>
+	<f:event type="preRenderView" listener="#{verAutorBean.carregarAutor()}" />
+</f:metadata>
+
 <h:body>
 	<co:header />
 
-	<h:form styleClass="ver-autor">
+	<h:panelGroup styleClass="ver-autor">
 		<h:panelGroup styleClass="author-info">
 			<h:outputText value="#{verAutorBean.name}" styleClass="author-name" />
 			<h:outputText value="#{verAutorBean.biography}"
 				styleClass="author-description" />
-			<h:commandLink
-				action="#{cadastrarAutorBean.irParaEditarAutor(verAutorBean.author)}"
-				value="EDITAR AUTOR" styleClass="author-edit-button" />
+
+			<h:outputLink value="cadastrarautor.jsf" styleClass="author-edit-button">
+				<f:param name="edit" value="#{verAutorBean.author.id}" />
+				EDITAR AUTOR
+			</h:outputLink>
 		</h:panelGroup>
 
 		<h:panelGroup styleClass="author-books-container">
@@ -33,16 +39,16 @@
 
 			<h:panelGroup styleClass="author-books">
 				<ui:repeat var="b" value="#{verAutorBean.books}">
-					<h:commandLink styleClass="book-item"
-						action="#{verLivroBean.irParaLivro(b)}">
 
+					<h:outputLink value="verlivro.jsf">
+						<f:param name="#{verLivroBean.viewParamName}" value="#{b.id}" />
 						<h:graphicImage value="#{b.coverUrl}" styleClass="book-item-img" />
-					</h:commandLink>
+					</h:outputLink>
+
 				</ui:repeat>
 			</h:panelGroup>
 		</h:panelGroup>
-
-	</h:form>
+	</h:panelGroup>
 </h:body>
 
 </html>
