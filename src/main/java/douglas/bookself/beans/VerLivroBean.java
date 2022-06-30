@@ -1,6 +1,5 @@
 package douglas.bookself.beans;
 
-import java.util.Arrays;
 import java.util.Collection;
 
 import javax.faces.bean.ManagedBean;
@@ -16,13 +15,7 @@ public class VerLivroBean {
 	private Book book;
 
 	public String irParaLivroComId(String bookId) {
-		Book book = BookRepository
-			.getInstance()
-			.getWithId(Arrays.asList(Long.parseLong(bookId)))
-			.iterator()
-			.next();
-
-		return this.irParaLivro( book );
+		return this.irParaLivro( BookRepository.findById( Long.parseLong(bookId) ) );
 	}
 
 	public String irParaLivro(Book book) {
@@ -39,9 +32,9 @@ public class VerLivroBean {
 	}
 
 	public String deletarLivro() {
-		BookRepository.getInstance().deletarLivro(book);
-		this.book = null;
+		BookRepository.deleteBook(book);
 
+		this.book = null;
 		return "index.jsf";
 	}
 
