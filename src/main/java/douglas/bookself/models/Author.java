@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,7 +26,7 @@ public class Author implements Serializable {
 	@Column(length = 500)
 	private String biography;
 
-	@ManyToMany(mappedBy = "authors")
+	@ManyToMany(mappedBy = "authors", fetch = FetchType.EAGER)
 	private Collection<Book> books;
 
 	public Author() { super(); }

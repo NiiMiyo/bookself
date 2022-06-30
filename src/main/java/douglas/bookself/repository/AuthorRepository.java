@@ -30,6 +30,8 @@ public class AuthorRepository extends Repository {
 		author = em.merge(author);
 		em.getTransaction().commit();
 
+		em.close();
+
 		return author;
 	}
 
@@ -42,7 +44,10 @@ public class AuthorRepository extends Repository {
 			author = (Author) em.createQuery("SELECT a FROM Author a WHERE id = :id")
 				.setParameter("id", id)
 				.getSingleResult();
-		} catch (NoResultException e) { }
+		} catch (NoResultException e) {
+		} finally {
+			em.close();
+		}
 
 		return author;
 	}
@@ -56,13 +61,18 @@ public class AuthorRepository extends Repository {
 			.setParameter("id", author.getId())
 			.executeUpdate();
 		em.getTransaction().commit();
+
+		em.close();
 	}
 
 	@SuppressWarnings("unchecked")
 	public static Collection<Author> getAllAuthors() {
 		EntityManager em = AuthorRepository.createEntityManager();
 
-		return em.createQuery("SELECT a FROM Author a ORDER BY id")
+		Collection<Author> results = em.createQuery("SELECT a FROM Author a ORDER BY id")
 			.getResultList();
+
+		em.close();
+		return results;
 	}
 }

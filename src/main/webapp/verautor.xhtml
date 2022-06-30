@@ -15,39 +15,52 @@
 </h:head>
 
 <f:metadata>
-	<f:event type="preRenderView" listener="#{verAutorBean.carregarAutor()}" />
+	<f:event type="preRenderView"
+		listener="#{verAutorBean.carregarAutor()}" />
 </f:metadata>
 
 <h:body>
 	<co:header />
 
 	<h:panelGroup styleClass="ver-autor">
-		<h:panelGroup styleClass="author-info">
-			<h:outputText value="#{verAutorBean.name}" styleClass="author-name" />
-			<h:outputText value="#{verAutorBean.biography}"
-				styleClass="author-description" />
+		<h:outputLink value="index.jsf" style="margin-left: auto">
+			<h:graphicImage style="height: 2em"
+				value="/resources/images/go-home.svg" />
+		</h:outputLink>
 
-			<h:outputLink value="cadastrarautor.jsf" styleClass="author-edit-button">
-				<f:param name="edit" value="#{verAutorBean.author.id}" />
-				EDITAR AUTOR
-			</h:outputLink>
-		</h:panelGroup>
+		<h:panelGroup style="display: flex; flex-direction: row">
+			<h:panelGroup styleClass="author-info">
+				<h:outputText value="#{verAutorBean.name}" styleClass="author-name" />
+				<h:outputText value="#{verAutorBean.biography}"
+					styleClass="author-description" />
+			</h:panelGroup>
 
-		<h:panelGroup styleClass="author-books-container">
-			<h:outputText value="LIVROS DESTE AUTOR"
-				styleClass="author-books-title" />
+			<h:panelGroup styleClass="author-books-container">
+				<h:outputText value="LIVROS DESTE AUTOR"
+					styleClass="author-books-title" />
 
-			<h:panelGroup styleClass="author-books">
-				<ui:repeat var="b" value="#{verAutorBean.books}">
+				<h:panelGroup styleClass="author-books">
+					<ui:repeat var="b" value="#{verAutorBean.books}">
 
-					<h:outputLink value="verlivro.jsf" title="#{b.title}">
-						<f:param name="#{verLivroBean.viewParamName}" value="#{b.id}" />
-						<h:graphicImage value="#{b.coverUrl}" styleClass="book-item-img" />
-					</h:outputLink>
+						<h:outputLink value="verlivro.jsf" title="#{b.title}">
+							<f:param name="#{verLivroBean.viewParamName}" value="#{b.id}" />
+							<h:graphicImage value="#{b.coverUrl}" styleClass="book-item-img" />
+						</h:outputLink>
 
-				</ui:repeat>
+					</ui:repeat>
+				</h:panelGroup>
 			</h:panelGroup>
 		</h:panelGroup>
+
+		<h:form styleClass="buttons-container">
+			<h:outputLink value="cadastrarautor.jsf"
+				styleClass="author-edit-button">
+				<f:param name="edit" value="#{verAutorBean.author.id}" />
+						EDITAR AUTOR
+					</h:outputLink>
+
+			<h:commandButton action="#{verAutorBean.deletarAutor}" image="/resources/images/delete.svg" styleClass="ver-autor-delete" />
+		</h:form>
 	</h:panelGroup>
 </h:body>
 

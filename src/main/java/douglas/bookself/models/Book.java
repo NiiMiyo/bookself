@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,7 +33,7 @@ public class Book implements Serializable {
 
 	private Integer year;
 
-	@ManyToMany
+	@ManyToMany( fetch = FetchType.EAGER )
 	@JoinTable(
 		joinColumns = @JoinColumn(name = "book_id"),
 		inverseJoinColumns = @JoinColumn(name = "author_id")

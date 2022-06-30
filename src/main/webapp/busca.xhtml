@@ -31,19 +31,20 @@
 			value="Foram encontrados #{pesquisaBean.quantityFound} resultados"
 			styleClass="search-quantity" />
 
-		<h:form styleClass="results-container">
+		<h:panelGroup styleClass="results-container">
 			<ui:repeat var="b" value="#{pesquisaBean.resultadosDaPesquisa}">
 				<h:panelGroup styleClass="result-item">
 
-					<h:commandLink styleClass="result-item-img"
-						action="#{verLivroBean.irParaLivro(b)}">
+					<h:outputLink value="verlivro.jsf" styleClass="result-item-img">
+						<f:param name="#{verLivroBean.viewParamName}" value="#{b.id}" />
 						<h:graphicImage value="#{b.coverUrl}" style="width: 100%" />
-					</h:commandLink>
+					</h:outputLink>
 
 					<h:panelGroup styleClass="result-item-text-container">
-						<h:commandLink
-							action="#{verLivroBean.irParaLivro(b)}"
-							value="#{b.title}" styleClass="result-item-title" />
+						<h:outputLink value="verlivro.jsf" styleClass="result-item-title">
+							<f:param name="#{verLivroBean.viewParamName}" value="#{b.id}" />
+							#{b.title}
+						</h:outputLink>
 
 						<h:outputText value="Escrito por #{b.authorsNames}"
 							styleClass="result-item-author" />
@@ -54,7 +55,7 @@
 					</h:panelGroup>
 				</h:panelGroup>
 			</ui:repeat>
-		</h:form>
+		</h:panelGroup>
 	</h:panelGroup>
 </h:body>
 

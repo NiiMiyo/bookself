@@ -8,7 +8,7 @@
 
 	margin: auto;
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	padding: 2% 7.5%;
 	align-items: center;
 	justify-content: center;
@@ -38,7 +38,7 @@
 
 .ver-autor .author-edit-button {
 	--padding-size: .75em;
-	width: 50%;
+	width: calc(var(--info-width) / 2);
 	padding: var(--padding-size) 0;
 
 	background-color: var(--button-background-color);
@@ -73,8 +73,20 @@
 
 	height: 17em;
 	overflow-y: auto;
+	margin-top: .5em;
 }
 
 .ver-autor .book-item-img {
 	height: var(--img-height);
+}
+
+.ver-autor .buttons-container {
+	display:flex;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.ver-autor .ver-autor-delete {
+	height: 2em;
+	margin-top: auto;
 }

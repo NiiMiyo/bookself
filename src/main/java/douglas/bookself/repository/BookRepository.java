@@ -35,6 +35,8 @@ public class BookRepository extends Repository {
 		book = em.merge(book);
 		em.getTransaction().commit();
 
+		em.close();
+
 		return book;
 	}
 
@@ -50,6 +52,7 @@ public class BookRepository extends Repository {
 				.getSingleResult();
 		} catch (NoResultException e) { }
 
+		em.close();
 		return book;
 	}
 
@@ -62,23 +65,31 @@ public class BookRepository extends Repository {
 			.setParameter("id", book.getId())
 			.executeUpdate();
 		em.getTransaction().commit();
+
+		em.close();
 	}
 
 	@SuppressWarnings("unchecked")
 	public static Collection<Book> getAllBooks() {
 		EntityManager em = BookRepository.createEntityManager();
 
-		return em.createQuery("SELECT b FROM Book b ORDER BY id")
+		Collection<Book> results = em.createQuery("SELECT b FROM Book b ORDER BY id")
 			.getResultList();
+
+		em.close();
+		return results;
 	}
 
 	@SuppressWarnings("unchecked")
 	public static Collection<Book> getLastAdded(Integer quantity) {
 		EntityManager em = BookRepository.createEntityManager();
 
-		return em.createQuery("SELECT b FROM Book b ORDER BY id DESC")
+		Collection<Book> results = em.createQuery("SELECT b FROM Book b ORDER BY id DESC")
 			.setMaxResults(quantity)
 			.getResultList();
+
+		em.close();
+		return results;
 	}
 
 	public static Book getRandomBook() {
@@ -90,10 +101,14 @@ public class BookRepository extends Repository {
 			.setMaxResults(1)
 			.getResultList();
 
+		Book result;
 		if (randomOrdered.iterator().hasNext())
-			return randomOrdered.iterator().next();
+			result = randomOrdered.iterator().next();
 		else
-			return null;
+			result = null;
+
+		em.close();
+		return result;
 	}
 
 	public static Collection<Book> searchFor(String query) {
