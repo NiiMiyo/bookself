@@ -1,6 +1,7 @@
 package douglas.bookself.repository;
 
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -90,5 +91,16 @@ public class BookRepository extends Repository {
 			return randomOrdered.iterator().next();
 		else
 			return null;
+	}
+
+	public static Collection<Book> searchFor(String query) {
+		return BookRepository
+			.getAllBooks()
+			.stream()
+			.filter( b -> 
+				b.getTitle().toLowerCase().contains(query.toLowerCase()) // Checks if query is on title
+				||
+				b.getAuthorsNames().toLowerCase().contains(query.toLowerCase()) // Checks if authors names contains query
+			).collect(Collectors.toList());
 	}
 }
