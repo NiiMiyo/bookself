@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityManager;
+
 import douglas.bookself.models.Author;
 import douglas.bookself.models.AuthorBook;
 import douglas.bookself.models.Book;
@@ -12,16 +14,23 @@ public class AuthorBookRepository extends Repository<AuthorBook> {
 	private static AuthorBookRepository instance;
 
 	public void deletarRelacoes(Book book) {
-		Collection<AuthorBook> relations = this.listAll()
-				.stream()
-				.filter(ab -> ab.getBookId().equals(book.getId()))
-				.collect(Collectors.toList());
+		EntityManager em = this.getEntityManager();
 
-		for (AuthorBook authorBook : relations) {
-			this.getEntityManager().getTransaction().begin();
-			this.getEntityManager().remove(authorBook);
-			this.getEntityManager().getTransaction().commit();
-		}
+		em.getTransaction().begin();
+		em.createQuery("DELETE FROM AuthorBook ab WHERE ab.bookId = ?1")
+			.setParameter(1, book.getId())
+			.executeUpdate();
+		em.getTransaction().commit();
+	}
+
+	public void deletarRelacoes(Author author) {
+		EntityManager em = this.getEntityManager();
+
+		em.getTransaction().begin();
+		em.createQuery("DELETE FROM AuthorBook ab WHERE ab.authorId = ?1")
+			.setParameter(1, author.getId())
+			.executeUpdate();
+		em.getTransaction().commit();
 	}
 
 	public Collection<AuthorBook> criarRelacao(Long bookId, Collection<Long> authorId) {
@@ -62,9 +71,10 @@ public class AuthorBookRepository extends Repository<AuthorBook> {
 	public Collection<Book> getBooks(Long authorId) {
 		Collection<AuthorBook> authorBooks = this
 			.getEntityManager()
-			.createQuery("SELECT a FROM AuthorBook a WHERE bookId = ?1")
+			.createQuery("SELECT ab FROM AuthorBook ab WHERE authorId = ?1")
 			.setParameter(1, authorId)
 			.getResultList();
+
 		return authorBooks.stream().map(ab -> ab.getBook()).collect(Collectors.toList());
 	}
 	public Collection<Book> getBooks(Author author) { return this.getBooks(author.getId()); }

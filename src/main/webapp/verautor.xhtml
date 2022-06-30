@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:co="http://java.sun.com/jsf/composite/templates">
+
+<h:head>
+	<title>Bookself - #{verLivroBean.title}</title>
+
+	<link rel="shortcut icon" href="resources/images/favicon.ico" />
+	<link rel="stylesheet" href="resources/css/global.css" />
+	<link rel="stylesheet" href="resources/css/header.css" />
+	<link rel="stylesheet" href="resources/css/verautor.css" />
+</h:head>
+
+<h:body>
+	<co:header />
+
+	<h:form styleClass="ver-autor">
+		<h:panelGroup styleClass="author-info">
+			<h:outputText value="#{verAutorBean.name}" styleClass="author-name" />
+			<h:outputText value="#{verAutorBean.biography}"
+				styleClass="author-description" />
+			<h:commandLink
+				action="#{cadastrarAutorBean.irParaEditarAutor(verAutorBean.author)}"
+				value="EDITAR AUTOR" styleClass="author-edit-button" />
+		</h:panelGroup>
+
+		<h:panelGroup styleClass="author-books-container">
+			<h:outputText value="LIVROS DESTE AUTOR"
+				styleClass="author-books-title" />
+
+			<h:panelGroup styleClass="author-books">
+				<ui:repeat var="b" value="#{verAutorBean.books}">
+					<h:commandLink styleClass="book-item"
+						action="#{verLivroBean.irParaLivro(b)}">
+
+						<h:graphicImage value="#{b.coverUrl}" styleClass="book-item-img" />
+					</h:commandLink>
+				</ui:repeat>
+			</h:panelGroup>
+		</h:panelGroup>
+
+	</h:form>
+</h:body>
+
+</html>

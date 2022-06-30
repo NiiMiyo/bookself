@@ -3,6 +3,7 @@ package douglas.bookself.beans;
 
 import javax.faces.bean.ManagedBean;
 
+import douglas.bookself.models.Author;
 import douglas.bookself.repository.AuthorRepository;
 
 @ManagedBean
@@ -17,6 +18,11 @@ public class CadastrarAutorBean {
 	public String cadastrar() {
 		AuthorRepository.getInstance().criarAutor(this.name, this.biography);
 		return "index.jsf";
+	}
+
+	public String irParaEditarAutor(Author author) {
+		// TODO
+		return "cadastrarautor.jsf";
 	}
 
 	public String getName() { return name; }

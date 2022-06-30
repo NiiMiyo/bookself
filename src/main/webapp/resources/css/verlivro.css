@@ -47,6 +47,11 @@
 	color: var(--light-text-color);
 }
 
+.ver-livro .ver-livro-container .ver-livro-text-container .authors-container .author-name {
+	color: var(--light-text-color);
+	text-decoration: none;
+}
+
 .ver-livro .ver-livro-container .ver-livro-text-container .authors-container .author-name:not(:last-child)::after {
 	content: ",\a0"
 }

@@ -2,7 +2,6 @@ package douglas.bookself.models;
 
 import java.io.Serializable;
 import java.lang.Long;
-import java.util.Arrays;
 
 import javax.persistence.*;
 
@@ -35,14 +34,14 @@ public class AuthorBook implements Serializable {
 	public Author getAuthor() {
 		return AuthorRepository
 			.getInstance()
-			.getWithId(Arrays.asList(this.authorId))
-			.iterator().next();
+			.getWithId(this.authorId);
 	}
 
 	public Book getBook() {
+		System.out.println(this.bookId);
+
 		return BookRepository
 			.getInstance()
-			.getWithId(Arrays.asList(this.authorId))
-			.iterator().next();
+			.getWithId(this.bookId);
 	}
 }

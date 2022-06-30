@@ -1,7 +1,7 @@
 package douglas.bookself.repository;
 
+import java.util.Arrays;
 import java.util.Collection;
-import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
 
@@ -48,12 +48,22 @@ public class BookRepository extends Repository<Book> {
 		return this.criarLivro(book);
 	}
 
+	public Book getWithId(Long id) {
+		Collection<Book> books = this.getWithId( Arrays.asList(id) );
+
+		if (books.iterator().hasNext())
+			return books.iterator().next();
+		else
+			return null;
+	}
+
+	@SuppressWarnings("unchecked")
 	public Collection<Book> getWithId(Collection<Long> ids) {
 		return this
-			.listAll()
-			.stream()
-			.filter(b -> ids.contains( b.getId()) )
-			.collect(Collectors.toList());
+			.getEntityManager()
+			.createQuery("SELECT b FROM Book b WHERE id IN ?1 ORDER BY id")
+			.setParameter(1, ids)
+			.getResultList();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -70,7 +80,7 @@ public class BookRepository extends Repository<Book> {
 	public Collection<Book> listAll() {
 		return this
 			.getEntityManager()
-			.createQuery("SELECT b FROM Book b")
+			.createQuery("SELECT b FROM Book b ORDER BY id")
 			.getResultList();
 	}
 
@@ -87,10 +97,11 @@ public class BookRepository extends Repository<Book> {
 		return this
 			.getEntityManager()
 			.createQuery("SELECT b "
-					+ "FROM Book b LEFT JOIN AuthorBook ab ON b.id = ab.bookId "
-					+ "LEFT JOIN Author a ON ab.authorId = a.id "
-					+ "WHERE LOWER(b.title) LIKE LOWER(?1) "
-					+ "OR LOWER(a.name) LIKE LOWER(?1)")
+				+ "FROM Book b LEFT JOIN AuthorBook ab ON b.id = ab.bookId "
+				+ "LEFT JOIN Author a ON ab.authorId = a.id "
+				+ "WHERE LOWER(b.title) LIKE LOWER(?1) "
+				+ "OR LOWER(a.name) LIKE LOWER(?1) "
+				+ "ORDER BY b.id")
 			.setParameter(1, "%" + query + "%")
 			.getResultList();
 	}

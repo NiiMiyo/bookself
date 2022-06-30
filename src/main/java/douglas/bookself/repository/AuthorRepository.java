@@ -1,12 +1,24 @@
 package douglas.bookself.repository;
 
+import java.util.Arrays;
 import java.util.Collection;
-import java.util.stream.Collectors;
+
+import javax.persistence.EntityManager;
 
 import douglas.bookself.models.Author;
 
 public class AuthorRepository extends Repository<Author> {
 	private static AuthorRepository instance;
+
+	public Author criarAutor(Author author) {
+		EntityManager em = this.getEntityManager();
+
+		em.getTransaction().begin();
+		author = em.merge(author);
+		em.getTransaction().commit();
+
+		return author;
+	}
 
 	public Author criarAutor(String name, String biography) {
 		Author author = new Author();
@@ -14,19 +26,25 @@ public class AuthorRepository extends Repository<Author> {
 		author.setName(name);
 		author.setBiography(biography);
 
-		this.getEntityManager().getTransaction().begin();
-		this.getEntityManager().persist(author);
-		this.getEntityManager().getTransaction().commit();
-
-		return author;
+		return this.criarAutor(author);
 	}
 
+	public Author getWithId(Long id) {
+		Collection<Author> authors = this.getWithId( Arrays.asList(id) );
+
+		if (authors.iterator().hasNext())
+			return authors.iterator().next();
+		else
+			return null;
+	}
+
+	@SuppressWarnings("unchecked")
 	public Collection<Author> getWithId(Collection<Long> ids) {
 		return this
-			.listAll()
-			.stream()
-			.filter(a -> ids.contains( a.getId()) )
-			.collect(Collectors.toList());
+			.getEntityManager()
+			.createQuery("SELECT a FROM Author a WHERE id IN ?1 ORDER BY id")
+			.setParameter(1, ids)
+			.getResultList();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -34,7 +52,7 @@ public class AuthorRepository extends Repository<Author> {
 	public Collection<Author> listAll() {
 		return this
 			.getEntityManager()
-			.createQuery("SELECT a FROM Author a")
+			.createQuery("SELECT a FROM Author a ORDER BY id")
 			.getResultList();
 	}
 
@@ -49,4 +67,10 @@ public class AuthorRepository extends Repository<Author> {
 
 	private AuthorRepository(String persistenceUnity) { super(persistenceUnity); }
 	private AuthorRepository() { super(); }
+
+	public void deletarAutor(Author author) {
+		AuthorBookRepository
+			.getInstance()
+			.deletarRelacoes(author);
+	}
 }
