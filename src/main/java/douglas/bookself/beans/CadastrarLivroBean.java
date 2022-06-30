@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +17,7 @@ import douglas.bookself.repository.BookRepository;
 import douglas.bookself.utils.UploadUtils;
 
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class CadastrarLivroBean {
 	private Book book;
 

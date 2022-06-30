@@ -22,7 +22,7 @@
 	<composite:implementation>
 		<h:panelGroup styleClass="last-added-container">
 			<h:outputLink value="verlivro.jsf" style="width: 20%; margin-right: .3em">
-				<f:param name="book_id" value="#{cc.attrs.bookid}" />
+				<f:param name="#{verLivroBean.viewParamName}" value="#{cc.attrs.bookid}" />
 
 				<h:graphicImage value="#{cc.attrs.imagename}"
 					styleClass="last-added-img" />
@@ -30,7 +30,7 @@
 
 			<h:panelGroup styleClass="last-added-text-container">
 				<h:outputLink value="verlivro.jsf" styleClass="last-added-bookname">
-					<f:param name="book_id" value="#{cc.attrs.bookid}" />
+					<f:param name="#{verLivroBean.viewParamName}" value="#{cc.attrs.bookid}" />
 					#{cc.attrs.bookname}
 				</h:outputLink>
 

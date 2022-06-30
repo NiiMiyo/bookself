@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Collection;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,14 +13,19 @@ import douglas.bookself.models.Book;
 import douglas.bookself.repository.BookRepository;
 
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class VerLivroBean {
 	private Book book;
+	public static final String VIEW_ID_PARAM_NAME = "book";
+
+	public String getViewParamName() {
+		return VerLivroBean.VIEW_ID_PARAM_NAME;
+	}
 
 	public void carregarLivro() throws IOException {
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpServletRequest myRequest = (HttpServletRequest) context.getExternalContext().getRequest();
-		String idString = myRequest.getParameter("book_id");
+		String idString = myRequest.getParameter(VerLivroBean.VIEW_ID_PARAM_NAME);
 
 		boolean err = false;
 		try {

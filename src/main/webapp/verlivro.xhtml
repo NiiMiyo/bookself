@@ -21,7 +21,7 @@
 <h:body>
 	<co:header />
 
-	<h:form styleClass="ver-livro">
+	<h:panelGroup styleClass="ver-livro">
 
 		<h:outputLink value="index.jsf" style="margin-left: auto">
 			<h:graphicImage style="height: 2em"
@@ -50,14 +50,14 @@
 			</h:panelGroup>
 		</h:panelGroup>
 
-		<h:panelGroup styleClass="buttons-container">
+		<h:form styleClass="buttons-container">
 			<h:outputLink value="cadastrarlivro.jsf" styleClass="ver-livro-edit">
 				<f:param name="edit" value="#{verLivroBean.id}" />
 				EDITAR LIVRO
 			</h:outputLink>
 
 			<h:commandButton action="#{verLivroBean.deletarLivro}" image="/resources/images/delete.svg" styleClass="ver-livro-delete" />
-		</h:panelGroup>
-	</h:form>
+		</h:form>
+	</h:panelGroup>
 </h:body>
 </html>

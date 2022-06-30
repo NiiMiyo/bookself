@@ -27,7 +27,7 @@
 
 			<h:panelGroup styleClass="recomendation-container">
 				<h:outputLink value="verlivro.jsf">
-					<f:param name="book_id" value="#{homeBean.recomendation.id}" />
+					<f:param name="#{verLivroBean.viewParamName}" value="#{homeBean.recomendation.id}" />
 
 					<h:graphicImage value="#{homeBean.recomendation.coverUrl}"
 						styleClass="recomendation-img" />
@@ -36,7 +36,7 @@
 				<h:panelGroup styleClass="recomendation-text-container">
 
 					<h:outputLink value="verlivro.jsf" styleClass="recomendation-title" >
-						<f:param name="book_id" value="#{homeBean.recomendation.id}" />
+						<f:param name="#{verLivroBean.viewParamName}" value="#{homeBean.recomendation.id}" />
 						#{homeBean.recomendation.title}
 					</h:outputLink>
 
