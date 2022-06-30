@@ -3,6 +3,8 @@ package douglas.bookself.beans;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 import douglas.bookself.models.Author;
 import douglas.bookself.repository.AuthorRepository;
@@ -20,17 +22,23 @@ public class CadastrarAutorBean {
 		return "index.jsf";
 	}
 
-	public String irParaCadastrarAutor() {
-		this.author = new Author();
+	public void carregarAutor() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletRequest myRequest = (HttpServletRequest) context.getExternalContext().getRequest();
+		String editAuthorId = myRequest.getParameter("edit");
 
-		return "cadastrarautor.jsf";
-	}
+		boolean err = false;
+		try {
+			Long id = Long.parseLong(editAuthorId);
+			this.author = AuthorRepository.findById(id);
 
-	public String irParaEditarAutor(Author author) {
-		if (author == null) return null;
+			err = (this.author == null);
+		} catch(NumberFormatException e) {
+			err = true;
+		}
 
-		this.author = author;
-		return "cadastrarautor.jsf";
+		if (err)
+			this.author = new Author();
 	}
 
 	public String getName() { return this.author.getName(); }

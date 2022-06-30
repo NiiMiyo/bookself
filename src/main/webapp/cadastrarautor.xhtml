@@ -16,6 +16,10 @@
 	<link rel="stylesheet" href="resources/css/cadastrarautor.css" />
 </h:head>
 
+<f:metadata>
+	<f:event type="preRenderView" listener="#{cadastrarAutorBean.carregarAutor()}" />
+</f:metadata>
+
 <h:body>
 	<co:header />
 
