@@ -21,24 +21,24 @@
 	<co:header />
 
 	<h:panelGroup styleClass="home-page">
-		<h:form styleClass="home-center">
+		<h:panelGroup styleClass="home-center">
 			<h:outputText value="RECOMENDAÇÃO DO DIA"
 				styleClass="recomendation-container-title" />
 
 			<h:panelGroup styleClass="recomendation-container">
-				<h:commandLink
-					action="#{verLivroBean.irParaLivro(homeBean.recomendation)}"
-					immediate="true">
+				<h:outputLink value="verlivro.jsf">
+					<f:param name="book_id" value="#{homeBean.recomendation.id}" />
 
 					<h:graphicImage value="#{homeBean.recomendation.coverUrl}"
 						styleClass="recomendation-img" />
-				</h:commandLink>
+				</h:outputLink>
 
 				<h:panelGroup styleClass="recomendation-text-container">
-					<h:commandLink
-						action="#{verLivroBean.irParaLivro(homeBean.recomendation)}"
-						immediate="true" value="#{homeBean.recomendation.title}"
-						styleClass="recomendation-title" />
+
+					<h:outputLink value="verlivro.jsf" styleClass="recomendation-title" >
+						<f:param name="book_id" value="#{homeBean.recomendation.id}" />
+						#{homeBean.recomendation.title}
+					</h:outputLink>
 
 					<h:outputText value="#{homeBean.recomendation.authorsNames}"
 						styleClass="recomendation-authors" />
@@ -47,7 +47,7 @@
 						styleClass="recomendation-description" />
 				</h:panelGroup>
 			</h:panelGroup>
-		</h:form>
+		</h:panelGroup>
 
 		<h:panelGroup styleClass="last-added">
 			<h:outputText value="ÚLTIMOS ADICIONADOS"
@@ -55,7 +55,8 @@
 
 			<ui:repeat var="lastbook" value="#{homeBean.lastAdded}">
 				<co:ultimosadicionados authorsname="#{lastbook.authorsNames}"
-					bookname="#{lastbook.title}" bookid="#{lastbook.id}" imagename="#{lastbook.coverUrl}" />
+					bookname="#{lastbook.title}" bookid="#{lastbook.id}"
+					imagename="#{lastbook.coverUrl}" />
 			</ui:repeat>
 		</h:panelGroup>
 	</h:panelGroup>

@@ -20,22 +20,24 @@
 	</composite:interface>
 
 	<composite:implementation>
-		<h:form styleClass="last-added-container">
-			<h:commandLink styleClass="last-added-img"
-				action="#{verLivroBean.irParaLivroComId(cc.attrs.bookid)}">
-				<h:graphicImage value="#{cc.attrs.imagename}" style="width: 100%"/>
-			</h:commandLink>
+		<h:panelGroup styleClass="last-added-container">
+			<h:outputLink value="verlivro.jsf" style="width: 20%; margin-right: .3em">
+				<f:param name="book_id" value="#{cc.attrs.bookid}" />
+
+				<h:graphicImage value="#{cc.attrs.imagename}"
+					styleClass="last-added-img" />
+			</h:outputLink>
 
 			<h:panelGroup styleClass="last-added-text-container">
-				<h:commandLink
-					action="#{verLivroBean.irParaLivroComId(cc.attrs.bookid)}"
-					value="#{cc.attrs.bookname}" styleClass="last-added-bookname" />
+				<h:outputLink value="verlivro.jsf" styleClass="last-added-bookname">
+					<f:param name="book_id" value="#{cc.attrs.bookid}" />
+					#{cc.attrs.bookname}
+				</h:outputLink>
 
 				<h:outputText value="#{cc.attrs.authorsname}"
 					styleClass="last-added-authors" />
 			</h:panelGroup>
-
-		</h:form>
+		</h:panelGroup>
 	</composite:implementation>
 </h:body>
 </html>

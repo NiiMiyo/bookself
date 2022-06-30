@@ -14,7 +14,11 @@
 	<link rel="stylesheet" href="resources/css/verlivro.css" />
 </h:head>
 
-<h:body onload="#{verLivroBean.validate()}">
+<f:metadata>
+	<f:event type="preRenderView" listener="#{verLivroBean.carregarLivro()}" />
+</f:metadata>
+
+<h:body>
 	<co:header />
 
 	<h:form styleClass="ver-livro">
@@ -33,7 +37,10 @@
 					<h:outputText value="#{verLivroBean.title}" styleClass="ver-livro-title" />
 					<h:panelGroup styleClass="authors-container">
 						<ui:repeat var="a" value="#{verLivroBean.authors}">
-							<h:commandLink action="#{verAutorBean.irParaAutor(a)}" value="#{a.name}" styleClass="author-name" />
+							<h:outputLink value="verautor.jsf" styleClass="author-name">
+								<f:param name="author_id" value="#{a.id}" />
+								#{a.name}
+							</h:outputLink>
 						</ui:repeat>
 						<h:outputText value="&nbsp;- #{verLivroBean.year}" />
 					</h:panelGroup>

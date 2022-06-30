@@ -3,30 +3,37 @@ package douglas.bookself.beans;
 import java.util.Collection;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 import douglas.bookself.models.Author;
 import douglas.bookself.models.Book;
 import douglas.bookself.repository.BookRepository;
 
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class VerLivroBean {
 	private Book book;
 
-	public String irParaLivroComId(String bookId) {
-		return this.irParaLivro( BookRepository.findById( Long.parseLong(bookId) ) );
-	}
+	public String carregarLivro() {
+		System.out.println("TO CARREGANDO");
 
-	public String irParaLivro(Book book) {
-		if (book == null) return null;
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletRequest myRequest = (HttpServletRequest) context.getExternalContext().getRequest();
+		String idString = myRequest.getParameter("book_id");
 
-		this.book = book;
-		return "verlivro.jsf";
-	}
+		boolean err = false;
+		try {
+			Long id = Long.parseLong(idString);
+			this.book = BookRepository.findById(id);
 
-	public String validate() {
-		return this.book == null
+			err = (this.book == null);
+		} catch(NumberFormatException e) {
+			err = true;
+		}
+
+		return err
 			? "index.jsf"
 			: null;
 	}
