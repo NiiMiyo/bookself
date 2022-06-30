@@ -45,7 +45,9 @@ public class CadastrarLivroBean {
 	}
 
 	public String cadastrar() {
-		book.setCover( UploadUtils.saveCover(this.getCoverFile()) );
+		String imageName = UploadUtils.saveCover(this.getCoverFile());
+		if (imageName != null)
+			book.setCover(imageName);
 
 		BookRepository.createOrAlterBook(book);
 
