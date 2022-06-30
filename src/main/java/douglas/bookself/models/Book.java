@@ -2,15 +2,13 @@ package douglas.bookself.models;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.stream.Collectors;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-import douglas.bookself.repository.AuthorBookRepository;
+import javax.persistence.ManyToMany;
 
 
 @Entity
@@ -31,6 +29,9 @@ public class Book implements Serializable {
 
 	private Integer year;
 
+	@ManyToMany(mappedBy = "books")
+	private Collection<Author> authors;
+
 	public Book() { super(); }
 
 	public long getId() { return this.id; }
@@ -38,24 +39,6 @@ public class Book implements Serializable {
 
 	public String getTitle() { return this.title; }
 	public void setTitle(String title) { this.title = title; }
-
-	public Collection<Author> getAuthors() {
-		return AuthorBookRepository.getInstance().getAuthors(this.id);
-	}
-	public void setAuthors(Collection<Author> authors) {
-		AuthorBookRepository.getInstance().deletarRelacoes(this);
-		AuthorBookRepository.getInstance().criarRelacao(this, authors);
-	}
-
-	public String getAuthorsNames() {
-		Collection<String> names = this
-			.getAuthors()
-			.stream()
-			.map(a -> a.getName())
-			.collect(Collectors.toList());
-		
-		return String.join(", ", names);
-	}
 
 	public String getDescription() { return this.description; }
 	public void setDescription(String description) { this.description = description; }
@@ -70,4 +53,7 @@ public class Book implements Serializable {
 
 	public Integer getYear() { return year; }
 	public void setYear(Integer year) { this.year = year; }
+
+	public Collection<Author> getAuthors() { return authors; }
+	public void setAuthors(Collection<Author> authors) { this.authors = authors; }
 }

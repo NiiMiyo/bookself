@@ -14,7 +14,7 @@ public class HomeBean {
 	public HomeBean() { }
 
 	public Collection<Book> getLastAdded() {
-		return BookRepository.getInstance().getLastAdded(5);
+		return BookRepository.getLastAdded(5);
 	}
 
 	public Book getRecomendation() {
@@ -25,6 +25,6 @@ public class HomeBean {
 	}
 
 	public void reloadRecomendation() {
-		this.recomendation = BookRepository.getInstance().getLivroAleatorio();
+		this.recomendation = BookRepository.getRandomBook();
 	}
 }
