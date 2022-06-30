@@ -54,7 +54,18 @@ public class BookRepository extends Repository {
 		EntityManager em = BookRepository.createEntityManager();
 
 		em.getTransaction().begin();
-		
+		em.createQuery("DELETE FROM Book WHERE id = :id")
+			.setParameter("id", book.getId())
+			.executeUpdate();
+		em.getTransaction().commit();
+	}
+
+	@SuppressWarnings("unchecked")
+	public static Collection<Book> getAllBooks() {
+		EntityManager em = BookRepository.createEntityManager();
+
+		return em.createQuery("SELECT b FROM Book b ORDER BY id")
+			.getResultList();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -70,7 +81,8 @@ public class BookRepository extends Repository {
 		EntityManager em = BookRepository.createEntityManager();
 
 		@SuppressWarnings("unchecked")
-		Collection<Book> randomOrdered = em.createQuery("SELECT b FROM Book b ORDER BY RANDOM()")
+		Collection<Book> randomOrdered = em
+			.createQuery("SELECT b FROM Book b ORDER BY RANDOM()")
 			.setMaxResults(1)
 			.getResultList();
 
