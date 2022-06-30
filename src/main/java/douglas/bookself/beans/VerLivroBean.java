@@ -1,5 +1,6 @@
 package douglas.bookself.beans;
 
+import java.io.IOException;
 import java.util.Collection;
 
 import javax.faces.bean.ManagedBean;
@@ -16,9 +17,7 @@ import douglas.bookself.repository.BookRepository;
 public class VerLivroBean {
 	private Book book;
 
-	public String carregarLivro() {
-		System.out.println("TO CARREGANDO");
-
+	public void carregarLivro() throws IOException {
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpServletRequest myRequest = (HttpServletRequest) context.getExternalContext().getRequest();
 		String idString = myRequest.getParameter("book_id");
@@ -33,9 +32,8 @@ public class VerLivroBean {
 			err = true;
 		}
 
-		return err
-			? "index.jsf"
-			: null;
+		if (err)
+			FacesContext.getCurrentInstance().getExternalContext().redirect("index.jsf");
 	}
 
 	public String deletarLivro() {

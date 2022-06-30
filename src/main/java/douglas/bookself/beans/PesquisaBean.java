@@ -1,28 +1,39 @@
 package douglas.bookself.beans;
 
+import java.io.IOException;
 import java.util.Collection;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 import douglas.bookself.models.Book;
 import douglas.bookself.repository.BookRepository;
 
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class PesquisaBean {
 	private String query;
 	private Collection<Book> resultadosDaPesquisa;
 
 	public PesquisaBean() { }
 
-	public String irParaBusca(String query) {
-		if (query == null || query.equals("")) return null;
+	public void carregarResultados() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletRequest myRequest = (HttpServletRequest) context.getExternalContext().getRequest();
+		String query = myRequest.getParameter("query");
+
+		if (query == null)
+			query = "";
 
 		this.query = query;
 		this.resultadosDaPesquisa = BookRepository.searchFor(query);
+	}
 
-		return "busca.jsf";
+
+	public void irParaBusca(String query) throws IOException {
+		FacesContext.getCurrentInstance().getExternalContext().redirect("busca.jsf?query=" + query);
 	}
 
 	public String getQuery() { return query; }
