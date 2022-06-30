@@ -60,6 +60,8 @@
 .search-page-container .results-container .result-item .result-item-text-container .result-item-title {
 	font-weight: 600;
 	font-size: 1.5em;
+	color: var(--dark-text-color);
+	text-decoration: none;
 }
 
 .search-page-container .results-container .result-item .result-item-text-container .result-item-author {

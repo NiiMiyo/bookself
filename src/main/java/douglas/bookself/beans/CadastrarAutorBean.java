@@ -2,32 +2,40 @@ package douglas.bookself.beans;
 
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 
 import douglas.bookself.models.Author;
 import douglas.bookself.repository.AuthorRepository;
 
 @ManagedBean
+@SessionScoped
 public class CadastrarAutorBean {
-	private String name;
-	private String biography;
+	private Author author;
 
-	public CadastrarAutorBean() {
-		this.name = "";
-	}
+	public CadastrarAutorBean() { }
 	
 	public String cadastrar() {
-		AuthorRepository.getInstance().criarAutor(this.name, this.biography);
+		AuthorRepository.createOrAlterAuthor(author);
+
 		return "index.jsf";
 	}
 
-	public String irParaEditarAutor(Author author) {
-		// TODO
+	public String irParaCadastrarAutor() {
+		this.author = new Author();
+
 		return "cadastrarautor.jsf";
 	}
 
-	public String getName() { return name; }
-	public void setName(String name) { this.name = name; }
+	public String irParaEditarAutor(Author author) {
+		if (author == null) return null;
 
-	public String getBiography() { return biography; }
-	public void setBiography(String biography) { this.biography = biography; }
+		this.author = author;
+		return "cadastrarautor.jsf";
+	}
+
+	public String getName() { return this.author.getName(); }
+	public void setName(String name) { this.author.setName(name); }
+
+	public String getBiography() { return this.author.getBiography(); }
+	public void setBiography(String biography) { this.author.setBiography(biography); }
 }

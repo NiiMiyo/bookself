@@ -1,17 +1,27 @@
 package douglas.bookself.repository;
 
-import java.util.Arrays;
 import java.util.Collection;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 
 import douglas.bookself.models.Author;
 
-public class AuthorRepository extends Repository<Author> {
-	private static AuthorRepository instance;
+public class AuthorRepository extends Repository {
 
-	public Author criarAutor(Author author) {
-		EntityManager em = this.getEntityManager();
+	// Crud
+	public static Author createAuthor(String name, String biography) {
+		Author author = new Author();
+
+		author.setName(name);
+		author.setBiography(biography);
+
+		return AuthorRepository.createOrAlterAuthor(author);
+	}
+
+	// CrUd
+	public static Author createOrAlterAuthor(Author author) {
+		EntityManager em = AuthorRepository.createEntityManager();
 
 		em.getTransaction().begin();
 		author = em.merge(author);
@@ -20,57 +30,36 @@ public class AuthorRepository extends Repository<Author> {
 		return author;
 	}
 
-	public Author criarAutor(String name, String biography) {
-		Author author = new Author();
+	// cRud
+	public static Author findById(Long id) {
+		EntityManager em = AuthorRepository.createEntityManager();
+		Author author = null;
 
-		author.setName(name);
-		author.setBiography(biography);
+		try {
+			author = (Author) em.createQuery("SELECT a FROM Author a WHERE id = :id")
+				.setParameter("id", id)
+				.getSingleResult();
+		} catch (NoResultException e) { }
 
-		return this.criarAutor(author);
+		return author;
 	}
 
-	public Author getWithId(Long id) {
-		Collection<Author> authors = this.getWithId( Arrays.asList(id) );
+	// cruD
+	public static void deleteAuthor(Author author) {
+		EntityManager em = AuthorRepository.createEntityManager();
 
-		if (authors.iterator().hasNext())
-			return authors.iterator().next();
-		else
-			return null;
+		em.getTransaction().begin();
+		em.createQuery("DELETE FROM Book WHERE id = :id")
+			.setParameter("id", author.getId())
+			.executeUpdate();
+		em.getTransaction().commit();
 	}
 
 	@SuppressWarnings("unchecked")
-	public Collection<Author> getWithId(Collection<Long> ids) {
-		return this
-			.getEntityManager()
-			.createQuery("SELECT a FROM Author a WHERE id IN ?1 ORDER BY id")
-			.setParameter(1, ids)
+	public static Collection<Author> getAllAuthors() {
+		EntityManager em = AuthorRepository.createEntityManager();
+
+		return em.createQuery("SELECT a FROM Author a ORDER BY id")
 			.getResultList();
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public Collection<Author> listAll() {
-		return this
-			.getEntityManager()
-			.createQuery("SELECT a FROM Author a ORDER BY id")
-			.getResultList();
-	}
-
-	public static AuthorRepository getInstance() { return AuthorRepository.getInstance(DEFAULT_PERSISTENCE_UNITY); }
-	public static AuthorRepository getInstance(String persistenceUnity) {
-		if (AuthorRepository.instance == null) {
-			AuthorRepository.instance = new AuthorRepository(persistenceUnity);
-		}
-
-		return AuthorRepository.instance;
-	}
-
-	private AuthorRepository(String persistenceUnity) { super(persistenceUnity); }
-	private AuthorRepository() { super(); }
-
-	public void deletarAutor(Author author) {
-		AuthorBookRepository
-			.getInstance()
-			.deletarRelacoes(author);
 	}
 }

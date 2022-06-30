@@ -20,7 +20,7 @@ public class PesquisaBean {
 		if (query == null || query.equals("")) return null;
 
 		this.query = query;
-		this.resultadosDaPesquisa = BookRepository.getInstance().pesquisarLivros(query);
+		this.resultadosDaPesquisa = BookRepository.searchFor(query);
 
 		return "busca.jsf";
 	}

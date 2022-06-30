@@ -11,6 +11,9 @@ import douglas.bookself.servlet.CoversServlet;
 
 public class UploadUtils {
 	public static String saveCover(Part fileUpload) {
+		if (fileUpload == null)
+			return null;
+
 		if (!fileUpload.getContentType().startsWith("image/"))
 			return null;
 

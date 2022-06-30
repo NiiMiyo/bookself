@@ -8,8 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-import douglas.bookself.repository.AuthorBookRepository;
+import javax.persistence.ManyToMany;
 
 
 @Entity
@@ -26,6 +25,9 @@ public class Author implements Serializable {
 	@Column(length = 500)
 	private String biography;
 
+	@ManyToMany(mappedBy = "authors")
+	private Collection<Book> books;
+
 	public Author() { super(); }
 
 	public Long getId() { return this.id; }
@@ -37,7 +39,6 @@ public class Author implements Serializable {
 	public String getBiography() { return biography; }
 	public void setBiography(String biography) { this.biography = biography; }
 
-	public Collection<Book> getBooks() {
-		return AuthorBookRepository.getInstance().getBooks(this.id);
-	}
+	public Collection<Book> getBooks() { return books; }
+	public void setBooks(Collection<Book> books) { this.books = books; }
 }
