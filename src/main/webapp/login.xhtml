@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:co="http://java.sun.com/jsf/composite/templates"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+
+<h:head>
+	<title>Bookself - Fazer login</title>
+
+	<link rel="shortcut icon" href="resources/images/favicon.ico" />
+	<link rel="stylesheet" href="resources/css/global.css" />
+	<link rel="stylesheet" href="resources/css/header.css" />
+	<link rel="stylesheet" href="resources/css/login.css" />
+</h:head>
+
+<f:metadata>
+	<f:event type="preRenderView" listener="#{usuarioLogadoBean.enviarParaHomeSeLogado()}" />
+</f:metadata>
+
+<h:body>
+	<co:header />
+
+	<h:form styleClass="login-page">
+		<h:panelGroup styleClass="page-header">
+			<div></div>
+
+			<h:outputText value="ENTRAR NA SUA CONTA" styleClass="page-title" />
+
+			<h:outputLink value="index.jsf">
+				<h:graphicImage style="height: 2em"
+					value="/resources/images/go-home.svg" />
+			</h:outputLink>
+		</h:panelGroup>
+
+		<h:panelGroup styleClass="input-container">
+			<h:panelGroup styleClass="input-group">
+				<h:graphicImage styleClass="input-icon"
+					value="/resources/images/cadastrar-autor-nome-icon.svg" />
+	
+				<h:inputText value="#{loginBean.username}"
+					id="username" required="true" styleClass="input-field"
+					requiredMessage="O nome do usuário deve ser informado"
+					a:placeholder="Nome de usuário" />
+			</h:panelGroup>
+
+			<h:message for="username" styleClass="error-message" />
+		</h:panelGroup>
+
+		<h:panelGroup styleClass="input-container">
+			<h:panelGroup styleClass="input-group">
+				<h:graphicImage styleClass="input-icon"
+					value="/resources/images/senha.svg" />
+	
+				<h:inputSecret value="#{loginBean.password}"
+					id="password" required="true" styleClass="input-field"
+					requiredMessage="A senha do usuário deve ser informada"
+					a:placeholder="Senha" />
+			</h:panelGroup>
+
+			<h:message for="password" styleClass="error-message" />
+		</h:panelGroup>
+
+		<h:messages globalOnly="true" styleClass="error-message" />
+
+		<h:commandButton action="#{loginBean.logar}" value="ENTRAR" styleClass="login-button" />
+
+		<h:panelGroup style="display: flex;">
+			<h:outputText value="Não possui uma conta?&nbsp;" />
+			<h:outputLink value="cadastrarusuario.jsf">Cadastre-se</h:outputLink>
+		</h:panelGroup>
+
+	</h:form>
+</h:body>
+
+</html>

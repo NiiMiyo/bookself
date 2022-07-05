@@ -52,14 +52,16 @@
 }
 
 .cadastrar-autor .cadastro-container .input-title-container .input-container .input-field {
-	height: 2.5em;
 	border-radius: var(--bigger-right-rounded);
-	border: none;
 	width: 100%;
 	background-color: var(--input-background-color);
 	overflow: auto;
 	color: var(--dark-text-color);
 	padding-left: 1em;
+
+	--border-size: 2px;
+	border: var(--border-size) solid var(--button-background-color);
+	height: calc(2.5em - (2 * var(--border-size)));
 }
 
 .cadastrar-autor .cadastro-container .input-title-container .input-container .input-field::placeholder {

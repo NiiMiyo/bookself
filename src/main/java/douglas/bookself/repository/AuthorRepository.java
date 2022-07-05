@@ -23,6 +23,7 @@ public class AuthorRepository extends Repository {
 	public static Author createOrAlterAuthor(Author author) {
 		EntityManager em = AuthorRepository.createEntityManager();
 
+		// TODO: trim on bean
 		author.setName(author.getName().trim());
 		author.setBiography(author.getBiography().trim());
 

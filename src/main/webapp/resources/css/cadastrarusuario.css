@@ -1,0 +1,89 @@
+@charset "ISO-8859-1";
+
+@charset "ISO-8859-1";
+
+.register-page {
+	width: 68%;
+	display: flex;
+	margin: auto;
+	background-color: var(--secondary-background-color);
+	border-radius: var(--smaller-border-radius);
+	flex-direction: column;
+	padding: 3% 3%;
+
+	--input-height: 2.5em;
+	align-items: center;
+}
+
+.register-page .page-header {
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+	margin-bottom: 1.5em;
+}
+
+.register-page .page-title {
+	color: var(--dark-text-color);
+	font-size: 1.5em;
+	font-weight: 700;
+}
+
+.register-page .input-container {
+	width: 50%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-bottom: 1em;
+}
+
+.register-page .input-group {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	width: 100%;
+}
+
+.register-page .input-icon {
+	--padding-size: .35em;
+	padding: var(--padding-size) var(--padding-size) var(--padding-size) calc(var(--padding-size) + .15em);
+
+	height: calc(var(--input-height) - (2 * var(--padding-size)));
+
+	background-color: var(--button-background-color);
+	border-radius: var(--bigger-left-rounded);
+}
+
+.register-page .input-field {
+	padding-left: 1em;
+	border-radius: var(--bigger-right-rounded);
+	color: var(--dark-text-color);
+
+	--border-size: 2px;
+	border: var(--border-size) solid var(--button-background-color);
+	height: calc(var(--input-height) + .5px);
+
+	width: 100%;
+	outline-color: var(--button-background-color);
+}
+
+.register-page .register-button {
+	color: #fff;
+	font-weight: 700;
+
+	--padding-size: .75em;
+	padding: var(--padding-size) 0;
+	width: 25%;
+
+	background-color: var(--button-background-color);
+	border: none;
+	border-radius: var(--bigger-border-radius);
+
+	margin-bottom: .5em;
+}
+
+.register-page .error-message {
+	color: var(--custom-red);
+	font-style: italic;
+	list-style-type: none;
+	padding: 0;
+}

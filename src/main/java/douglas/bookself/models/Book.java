@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 
 @Entity
@@ -32,6 +33,9 @@ public class Book implements Serializable {
 	private String cover;
 
 	private Integer year;
+
+	@OneToMany(mappedBy = "book")
+	private Collection<BookRegister> registers;
 
 	@ManyToMany( fetch = FetchType.EAGER )
 	@JoinTable(
@@ -72,4 +76,7 @@ public class Book implements Serializable {
 
 		return String.join(", ", names);
 	}
+
+	public Collection<BookRegister> getRegisters() { return registers; }
+	public void setRegisters(Collection<BookRegister> registers) { this.registers = registers; }
 }

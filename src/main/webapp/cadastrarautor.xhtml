@@ -17,6 +17,7 @@
 </h:head>
 
 <f:metadata>
+	<f:event type="preRenderView" listener="#{usuarioLogadoBean.enviarParaLoginSeDeslogado()}" />
 	<f:event type="preRenderView" listener="#{cadastrarAutorBean.carregarAutor()}" />
 </f:metadata>
 

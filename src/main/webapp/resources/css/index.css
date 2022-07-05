@@ -79,3 +79,15 @@
 	font-size: 1.5em;
 	margin-bottom: .5em;
 }
+
+.home-page .welcome-container {
+	width: 70%;
+	color: var(--dark-text-color);
+	margin-bottom: 1.5em;
+	font-size: 1.75em;
+	font-weight: 700;
+}
+
+.home-page .welcome-container .username {
+	font-style: italic;
+}

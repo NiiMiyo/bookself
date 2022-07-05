@@ -8,6 +8,7 @@
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
 <f:metadata>
+	<f:event type="preRenderView" listener="#{usuarioLogadoBean.enviarParaLoginSeDeslogado()}" />
 	<f:event type="preRenderView" listener="#{cadastrarLivroBean.carregarLivro()}" />
 </f:metadata>
 

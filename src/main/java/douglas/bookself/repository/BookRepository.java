@@ -28,6 +28,7 @@ public class BookRepository extends Repository {
 	public static Book createOrAlterBook(Book book) {
 		EntityManager em = BookRepository.createEntityManager();
 
+		// TODO: trim on Bean
 		book.setTitle(book.getTitle().trim());
 		book.setDescription(book.getDescription().trim());
 
