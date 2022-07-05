@@ -6,7 +6,6 @@
 		<class>douglas.bookself.models.Author</class>
 		<class>douglas.bookself.models.Book</class>
 		<class>douglas.bookself.models.BookRegister</class>
-		<class>douglas.bookself.models.AuthorBook</class>
 
 		<properties>
 			<property
