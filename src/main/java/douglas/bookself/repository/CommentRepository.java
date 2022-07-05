@@ -22,4 +22,16 @@ public class CommentRepository extends Repository {
 
 		return comment;
 	}
+
+	public static void deleteComment(Long id) {
+		EntityManager em = CommentRepository.createEntityManager();
+
+		em.getTransaction().begin();
+		em.createQuery("DELETE FROM Comment WHERE id = :id")
+			.setParameter("id", id)
+			.executeUpdate();
+		em.getTransaction().commit();
+
+		em.close();
+	}
 }

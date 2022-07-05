@@ -3,7 +3,8 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:co="http://java.sun.com/jsf/composite/templates">
+	xmlns:co="http://java.sun.com/jsf/composite/templates"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
 <h:head>
 	<title>Bookself - #{verLivroBean.title}</title>
@@ -64,15 +65,22 @@
 			styleClass="comment-title" />
 
 		<h:form styleClass="new-comment-container" rendered="#{usuarioLogadoBean.logado}">
-			<h:inputTextarea value="#{verLivroBean.comment}" styleClass="new-comment-input" />
+			<h:inputTextarea value="#{verLivroBean.comment}" styleClass="new-comment-input" a:placeholder="Comente algo sobre esse livro!" />
 			<h:commandButton action="#{verLivroBean.comentar}" value="Comentar" styleClass="new-comment-button" />
 		</h:form>
 
 		<ui:repeat var="c" value="#{verLivroBean.book.comments}">
-			<h:panelGroup styleClass="comment-container">
-				<h:outputText value="@#{c.account.username}" styleClass="comment-username" />
+			<h:form styleClass="comment-container">
+				<h:panelGroup styleClass="comment-header">
+					<h:outputText value="@#{c.account.username}" styleClass="comment-username" />
+
+					<h:commandButton action="#{verLivroBean.deletarComentario(c.id)}" 
+						image="/resources/images/delete.svg" styleClass="ver-livro-delete"
+						rendered="#{usuarioLogadoBean.loggedUser.id == c.account.id}" />
+				</h:panelGroup>
+
 				<h:outputText value="disse &quot;#{c.comment}&quot;" styleClass="comment-content" />
-			</h:panelGroup>
+			</h:form>
 		</ui:repeat>
 	</h:panelGroup>
 </h:body>

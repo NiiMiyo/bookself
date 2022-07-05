@@ -163,7 +163,6 @@
 
 .ver-livro .comment-username {
 	display: flex;
-	margin-right: auto;
 	font-size: 1.5em;
 	color: var(--dark-text-color-secondary);
 	margin-bottom: .25em;
@@ -172,4 +171,15 @@
 .ver-livro .comment-content {
 	color: var(--dark-text-color);
 	font-style: italic;
+}
+
+.ver-livro .comment-header {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.ver-livro .ver-livro-delete {
+	height: 2em;
 }

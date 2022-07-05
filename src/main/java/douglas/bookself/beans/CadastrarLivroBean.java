@@ -51,7 +51,7 @@ public class CadastrarLivroBean {
 
 		BookRepository.createOrAlterBook(book);
 
-		return "index.jsf";
+		return "verlivro.jsf?book=" + book.getId();
 	}
 
 	public Collection<Author> getAllAuthors() {

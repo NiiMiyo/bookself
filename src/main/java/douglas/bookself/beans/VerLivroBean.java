@@ -46,6 +46,8 @@ public class VerLivroBean {
 
 		if (err)
 			FacesContext.getCurrentInstance().getExternalContext().redirect("index.jsf");
+
+		this.comment = "";
 	}
 
 	public String deletarLivro() {
@@ -64,6 +66,10 @@ public class VerLivroBean {
 				book, this.comment
 			);
 		}
+	}
+
+	public void deletarComentario(Long id) {
+		CommentRepository.deleteComment(id);
 	}
 
 	public Book getBook() { return this.book; }
