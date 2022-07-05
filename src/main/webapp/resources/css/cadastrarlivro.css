@@ -102,9 +102,7 @@
 
 
 .cadastrar-livro .right-side .cadastro-label-group .input-group .input-field {
-	height: 2.5em;
 	border-radius: var(--bigger-right-rounded);
-	border: none;
 	width: 100%;
 	background-color: var(--input-background-color);
 	overflow: auto;
@@ -118,10 +116,13 @@
 
 
 .cadastrar-livro .right-side .cadastro-label-group .input-group .authors-input-field-container {
-	height: 4.25em;
 	overflow-y: auto;
 	overflow-x: hidden;
 	width: 100%;
+
+	--border-size: 2px;
+	border: var(--border-size) solid var(--button-background-color);
+	height: calc(4.25em - (2 * var(--border-size)));
 }
 
 .cadastrar-livro .right-side .cadastro-label-group .input-group .authors-input-field tr {
@@ -133,7 +134,6 @@
 .cadastrar-livro .right-side .description-year-container .cadastro-label-group .input-field {
 	color: var(--dark-text-color);
 	background-color: var(--input-background-color);
-	border: none;
 }
 
 .cadastrar-livro .right-side .description-year-container .cadastro-label-group .description-input-field {
@@ -186,4 +186,10 @@
 .cadastrar-livro .input-field::placeholder {
 	font-style: italic;
 	color: var(--light-text-color);
+}
+
+.cadastrar-livro .input-field:not(.authors-input-field) {
+	--border-size: 2px;
+	border: var(--border-size) solid var(--button-background-color);
+	height: calc(2.5em - (2 * var(--border-size)));
 }

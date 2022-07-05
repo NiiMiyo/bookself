@@ -1,5 +1,7 @@
 package douglas.bookself.repository;
 
+import java.util.Collection;
+
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 
@@ -29,6 +31,20 @@ public class UserRepository extends Repository {
 		em.close();
 
 		return user;
+	}
+
+	public static boolean usernameExists(String username) {
+		EntityManager em = UserRepository.createEntityManager();
+		em.getTransaction().begin();
+		@SuppressWarnings("unchecked")
+		Collection<Integer> accounts = em.
+			createQuery("SELECT 1 FROM Account WHERE username = :username")
+			.setParameter("username", username)
+			.getResultList();
+		em.getTransaction().commit();
+		em.close();
+
+		return accounts.size() > 0;
 	}
 
 	public static Account findWithCredentials(String username, String password) {

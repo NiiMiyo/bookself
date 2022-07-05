@@ -4,10 +4,11 @@
 
 :root {
 	--header-background: #349AD5;
-	--dark-text-color: #14222F;
+	--dark-text-color: #2f516d;
+	--dark-text-color-secondary: #14222F;
 	--light-text-color: #5B6268;
 	--button-background-color: #44749D;
-	--input-background-color: #CECCCC;
+	--input-background-color: #e6e5e5;
 	--secondary-background-color: #E2F3FC;
 	--custom-red: #D45454;
 

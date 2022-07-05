@@ -1,7 +1,9 @@
 package douglas.bookself.beans;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.context.FacesContext;
 
 import douglas.bookself.models.Account;
 import douglas.bookself.repository.UserRepository;
@@ -19,9 +21,13 @@ public class LoginBean {
 	public String logar() {
 		Account account = UserRepository.findWithCredentials(username, password);
 
-		// TODO: mensagem de erro
-		if (account == null)
+		if (account == null) {
+			FacesContext.getCurrentInstance().addMessage(
+				null,
+				new FacesMessage("Nenhuma conta com as credenciais informadas")
+			);
 			return null;
+		}
 
 		this.usuarioLogadoBean.setLoggedUser(account);
 		return "index.jsf";

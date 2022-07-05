@@ -17,7 +17,7 @@
 }
 
 .last-added-container .last-added-text-container .last-added-bookname {
-	color: var(--dark-text-color);
+	color: var(--dark-text-color-secondary);
 	font-weight: 600;
 
 	text-decoration: none;

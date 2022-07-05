@@ -25,4 +25,9 @@ public class UsuarioLogadoBean {
 		if (!this.isLogado())
 			FacesContext.getCurrentInstance().getExternalContext().redirect("login.jsf");
 	}
+
+	public void enviarParaHomeSeLogado() throws IOException {
+		if (this.isLogado())
+			FacesContext.getCurrentInstance().getExternalContext().redirect("index.jsf");
+	}
 }

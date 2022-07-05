@@ -3,7 +3,8 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:co="http://java.sun.com/jsf/composite/templates">
+	xmlns:co="http://java.sun.com/jsf/composite/templates"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
 <h:head>
 	<title>Bookself - Cadastrar usuário</title>
@@ -17,11 +18,56 @@
 <h:body>
 	<co:header />
 
-	<h:form>
-		<h:inputText value="#{cadastrarUsuarioBean.user.username}" id="username" required="true" requiredMessage="O nome do usuário deve ser informado" />
-		<h:inputSecret value="#{cadastrarUsuarioBean.user.password}" id="password" required="true" requiredMessage="A senha do usuário deve ser informada" />
+	<h:form styleClass="register-page">
+		<h:panelGroup styleClass="page-header">
+			<div></div>
 
-		<h:commandButton action="#{cadastrarUsuarioBean.cadastrar}" value="Cadastrar" />
+			<h:outputText value="CADASTRE-SE" styleClass="page-title" />
+
+			<h:outputLink value="index.jsf">
+				<h:graphicImage style="height: 2em"
+					value="/resources/images/go-home.svg" />
+			</h:outputLink>
+		</h:panelGroup>
+
+		<h:panelGroup styleClass="input-container">
+			<h:panelGroup styleClass="input-group">
+				<h:graphicImage styleClass="input-icon"
+					value="/resources/images/cadastrar-autor-nome-icon.svg" />
+
+				<h:inputText value="#{cadastrarUsuarioBean.user.username}"
+					id="username" required="true" styleClass="input-field"
+					requiredMessage="O nome do usuário deve ser informado"
+					a:placeholder="Nome de usuário"/>
+			</h:panelGroup>
+
+			<h:message for="username" styleClass="error-message" />
+		</h:panelGroup>
+
+		<h:panelGroup styleClass="input-container">
+			<h:panelGroup styleClass="input-group">
+				<h:graphicImage styleClass="input-icon"
+					value="/resources/images/senha.svg" />
+
+				<h:inputSecret value="#{cadastrarUsuarioBean.user.password}"
+					id="password" required="true" styleClass="input-field"
+					requiredMessage="A senha do usuário deve ser informada"
+					a:placeholder="Senha"/>
+			</h:panelGroup>
+
+			<h:message for="password" styleClass="error-message" />
+		</h:panelGroup>
+
+		<h:messages globalOnly="true" styleClass="error-message" />
+
+		<h:commandButton action="#{cadastrarUsuarioBean.cadastrar}"
+			value="Cadastrar" styleClass="register-button" />
+
+		<h:panelGroup style="display: flex;">
+			<h:outputText value="Já uma conta?&nbsp;" />
+			<h:outputLink value="login.jsf">Entre</h:outputLink>
+		</h:panelGroup>
+		
 	</h:form>
 </h:body>
 
