@@ -79,6 +79,8 @@
 	border-radius: var(--bigger-border-radius);
 
 	margin-bottom: .5em;
+
+	cursor: pointer;
 }
 
 .register-page .error-message {
