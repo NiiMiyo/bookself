@@ -50,7 +50,7 @@
 			</h:panelGroup>
 		</h:panelGroup>
 
-		<h:form styleClass="buttons-container">
+		<h:form styleClass="buttons-container" rendered="#{usuarioLogadoBean.logado}">
 			<h:outputLink value="cadastrarlivro.jsf" styleClass="ver-livro-edit">
 				<f:param name="edit" value="#{verLivroBean.id}" />
 				EDITAR LIVRO

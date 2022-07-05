@@ -52,7 +52,7 @@
 			</h:panelGroup>
 		</h:panelGroup>
 
-		<h:form styleClass="buttons-container">
+		<h:form styleClass="buttons-container" rendered="#{usuarioLogadoBean.logado}">
 			<h:outputLink value="cadastrarautor.jsf"
 				styleClass="author-edit-button">
 				<f:param name="edit" value="#{verAutorBean.author.id}" />
