@@ -18,6 +18,7 @@ public class Comment implements Serializable {
 	@ManyToOne
 	private Account account;
 
+	@Column( length = 1000 )
 	private String comment;
 
 	public Comment() { super(); }

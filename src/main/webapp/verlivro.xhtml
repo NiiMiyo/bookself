@@ -69,7 +69,10 @@
 		</h:form>
 
 		<ui:repeat var="c" value="#{verLivroBean.book.comments}">
-			<h:outputText value="#{c.comment}" style="display: block" />
+			<h:panelGroup styleClass="comment-container">
+				<h:outputText value="@#{c.account.username}" styleClass="comment-username" />
+				<h:outputText value="disse &quot;#{c.comment}&quot;" styleClass="comment-content" />
+			</h:panelGroup>
 		</ui:repeat>
 	</h:panelGroup>
 </h:body>
