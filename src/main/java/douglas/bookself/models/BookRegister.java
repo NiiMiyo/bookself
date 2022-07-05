@@ -18,12 +18,10 @@ public class BookRegister implements Serializable {
 	private long id;
 
 	@ManyToOne
-	@Column(nullable = false)
 	private Book book;
 
 	@ManyToOne
-	@Column(nullable = false)
-	private User user;
+	private Account user;
 
 	@Column(nullable = false)
 	private RegisterState state;
@@ -39,6 +37,6 @@ public class BookRegister implements Serializable {
 	public RegisterState getState() { return this.state; }
 	public void setState(RegisterState state) { this.state = state; }
 
-	public User getUser() { return user; }
-	public void setUser(User user) { this.user = user; }
+	public Account getUser() { return user; }
+	public void setUser(Account user) { this.user = user; }
 }
