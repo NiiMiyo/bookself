@@ -21,22 +21,35 @@
 					styleClass="search-bar-input" required="true"
 					a:placeholder="Busque por titulo e autor" />
 
-				<h:commandButton action="#{pesquisaBean.irParaBusca(headerBean.searchText)}"
+				<h:commandButton
+					action="#{pesquisaBean.irParaBusca(headerBean.searchText)}"
 					image="/resources/images/search.svg" styleClass="search-bar-icon">
 				</h:commandButton>
 			</h:form>
 
-			<h:panelGroup class="header-button-container">
-				<h:outputLink value="cadastrarlivro.jsf" title="Cadastrar novo livro">
+			<h:form class="header-button-container">
+				<h:outputLink value="cadastrarlivro.jsf"
+					title="Cadastrar novo livro" rendered="#{usuarioLogadoBean.logado}">
 					<h:graphicImage library="images" name="book-cadastro.svg"
 						styleClass="header-button" alt="Cadastrar novo livro" />
 				</h:outputLink>
 
-				<h:outputLink value="cadastrarautor.jsf" title="Cadastrar novo autor">
+				<h:outputLink value="cadastrarautor.jsf"
+					title="Cadastrar novo autor" rendered="#{usuarioLogadoBean.logado}">
 					<h:graphicImage library="images" name="author-cadastro.svg"
 						styleClass="header-button" alt="Cadastrar novo autor" />
 				</h:outputLink>
-			</h:panelGroup>
+
+				<h:commandButton action="#{usuarioLogadoBean.deslogar()}"
+					immediate="true" image="/resources/images/logout.svg"
+					styleClass="header-button" rendered="#{usuarioLogadoBean.logado}" />
+
+				<h:outputLink value="login.jsf" title="Entrar na sua conta"
+					rendered="#{!usuarioLogadoBean.logado}" styleClass="header-button">
+					LOGIN
+				</h:outputLink>
+
+			</h:form>
 		</div>
 	</composite:implementation>
 </h:body>

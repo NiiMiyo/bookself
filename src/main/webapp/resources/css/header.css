@@ -59,15 +59,19 @@
 	border-radius: var(--bigger-right-rounded);
 }
 
-.header .header-button-container a:not(:last-child) {
-	margin-right: 1em;
+.header .header-button-container > *:not(:last-child) {
+	margin-right: .5em;
 }
 
 .header .header-button {
-	height: 2em;
-	padding: .65em;
+	height: 1.5em;
+	padding: .5em;
 	background-color: var(--button-background-color);
 	border-radius: var(--bigger-border-radius);
 
 	filter: var(--shadow);
+	color: #fff;
+	font-weight: 700;
+	text-decoration: none;
+	font-size: 1.25em;
 }
