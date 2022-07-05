@@ -58,6 +58,19 @@
 
 			<h:commandButton action="#{verLivroBean.deletarLivro}" image="/resources/images/delete.svg" styleClass="ver-livro-delete" />
 		</h:form>
+
+		<h:outputText
+			value="#{verLivroBean.book.comments.size()} comentários"
+			styleClass="comment-title" />
+
+		<h:form styleClass="new-comment-container" rendered="#{usuarioLogadoBean.logado}">
+			<h:inputTextarea value="#{verLivroBean.comment}" styleClass="new-comment-input" />
+			<h:commandButton action="#{verLivroBean.comentar}" value="Comentar" styleClass="new-comment-button" />
+		</h:form>
+
+		<ui:repeat var="c" value="#{verLivroBean.book.comments}">
+			<h:outputText value="#{c.comment}" style="display: block" />
+		</ui:repeat>
 	</h:panelGroup>
 </h:body>
 </html>

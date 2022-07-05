@@ -15,6 +15,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 
 @Entity
 public class Book implements Serializable {
@@ -36,6 +39,10 @@ public class Book implements Serializable {
 
 	@OneToMany(mappedBy = "book")
 	private Collection<BookRegister> registers;
+
+	@OneToMany(mappedBy = "book")
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private Collection<Comment> comments;
 
 	@ManyToMany( fetch = FetchType.EAGER )
 	@JoinTable(
@@ -79,4 +86,7 @@ public class Book implements Serializable {
 
 	public Collection<BookRegister> getRegisters() { return registers; }
 	public void setRegisters(Collection<BookRegister> registers) { this.registers = registers; }
+
+	public Collection<Comment> getComments() { return comments; }
+	public void setComments(Collection<Comment> comments) { this.comments = comments; }
 }

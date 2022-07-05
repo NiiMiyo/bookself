@@ -7,6 +7,7 @@
 		<class>douglas.bookself.models.Book</class>
 		<class>douglas.bookself.models.BookRegister</class>
 		<class>douglas.bookself.models.Account</class>
+		<class>douglas.bookself.models.Comment</class>
 
 		<properties>
 			<property

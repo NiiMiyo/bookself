@@ -13,6 +13,7 @@
 	align-items: center;
 
 	--img-width: 25%;
+	--img-distance: 1.5em;
 }
 
 .ver-livro .ver-livro-container {
@@ -28,8 +29,6 @@
 }
 
 .ver-livro .ver-livro-container .ver-livro-text-container {
-	--img-distance: 1.5em;
-
 	margin-left: var(--img-distance);
 	display: flex;
 	flex-direction: column;
@@ -98,4 +97,50 @@
 .ver-livro .buttons-container .ver-livro-delete {
 	height: 2em;
 	margin-top: auto;
+}
+
+.ver-livro .comment-title {
+	display: flex;
+	margin-right: auto;
+	font-size: 1.25em;
+	color: var(--dark-text-color);
+	font-weight: 700;
+	margin-top: 1em;
+}
+
+.ver-livro .new-comment-container {
+	width: 50%;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.ver-livro .new-comment-input {
+	height: 5em;
+	width: 100%;
+	padding: .5em;
+
+	resize: none;
+	overflow: auto;
+
+	color: var(--dark-text-color);
+	background-color: var(--input-background-color);
+
+	border-radius: var(--bigger-border-radius);
+	border: 2px solid var(--button-background-color);
+
+	margin: 1em 0 .5em 0;
+}
+
+.ver-livro .new-comment-button {
+	height: 2.5em;
+	padding: 0 2em;
+	border-radius: var(--bigger-border-radius);
+	background-color: var(--button-background-color);
+	color: #fff;
+	border: none;
+	font-weight: 700;
+	cursor: pointer;
+	margin-left: auto;
 }
