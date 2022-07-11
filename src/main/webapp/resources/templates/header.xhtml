@@ -19,7 +19,7 @@
 			<h:form styleClass="search-bar">
 				<h:inputText value="#{headerBean.searchText}"
 					styleClass="search-bar-input" required="true"
-					a:placeholder="Busque por titulo e autor" />
+					a:placeholder="Busque por titulo e autor" autocomplete="off" />
 
 				<h:commandButton
 					action="#{pesquisaBean.irParaBusca(headerBean.searchText)}"

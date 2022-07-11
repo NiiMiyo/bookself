@@ -66,7 +66,7 @@
 								required="true"
 								requiredMessage="O título do livro deve ser informado"
 								styleClass="input-field"
-								a:placeholder="Insira o título do livro" />
+								a:placeholder="Insira o título do livro" autocomplete="off" />
 						</h:panelGroup>
 
 						<h:message for="title" styleClass="error-message" />
@@ -123,7 +123,8 @@
 										styleClass="year-input-field input-field" required="true"
 										requiredMessage="O ano de publicação do livro deve ser informado"
 										converterMessage="Deve ser informado um número"
-										a:placeholder="Insira o ano de publicação do livro">
+										a:placeholder="Insira o ano de publicação do livro"
+										autocomplete="off" >
 										<f:convertNumber integerOnly="true" groupingUsed="false" />
 									</h:inputText>
 								</h:panelGroup>
